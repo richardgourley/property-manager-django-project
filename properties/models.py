@@ -6,3 +6,4 @@ class Property(models.Model):
 	bedrooms = models.IntegerField(deafult=0)
 	bathrooms = models.IntegerField(default=0)
 	description = models.TextField(blank=False)
+	pub_date = models.DateTimeField('date published')
