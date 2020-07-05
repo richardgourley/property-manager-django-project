@@ -21,3 +21,7 @@ class Agent(models.Model):
 class Office(models.Model):
 	office_name = models.CharField(max_length=150)
 	address = models.TextField(blank=False)
+
+class City(models.Model):
+	city_name = models.CharField(max_length=150)
+
