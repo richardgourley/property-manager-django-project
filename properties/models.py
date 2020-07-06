@@ -29,8 +29,8 @@ class Property(models.Model):
 
     def display_agent(self):
         #Create a string for the Agent. Required for displaying agent in property list_detail.
-        agents = Agent.objects.all()
-        return ', '.join(agent.agent_name for agent in agents)
+        agents = Property.objects.filter(agent_id=self.id)
+        return (', ').join(agent.name for agent in agents)
 
 
 class Agent(models.Model):
@@ -39,8 +39,4 @@ class Agent(models.Model):
     property = models.ManyToManyField(Property)
     # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
     office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
-
-
-
-
 
