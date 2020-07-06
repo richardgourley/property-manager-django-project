@@ -6,7 +6,7 @@ class AgentInLine(admin.StackedInline):
 	model = Agent.property.through
 
 class PropertyAdmin(admin.ModelAdmin):
-	list_display = ['property_name', 'bedrooms', 'bathrooms']
+	list_display = ['property_name', 'bedrooms', 'bathrooms', 'city']
 	inlines = [
         AgentInLine,
 	]
