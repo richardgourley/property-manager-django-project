@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import Property
+from .models import Property, Agent, Office
 
 # Register your models here.
-admin.site.register(Property)
+class AgentInLine(admin.TabularInline):
+	model = Agent.property.through
+
+class PropertyAdmin(admin.ModelAdmin):
+	inlines = [
+        AgentInLine,
+	]
+
+admin.site.register(Property, PropertyAdmin)
+
