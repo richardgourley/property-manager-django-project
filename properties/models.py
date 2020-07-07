@@ -5,6 +5,9 @@ class Office(models.Model):
     office_name = models.CharField(max_length=150)
     address = models.TextField(blank=False)
 
+    def __str__(self):
+        return self.office_name
+
 class City(models.Model):
     class Meta:
         verbose_name = 'city'
@@ -26,6 +29,7 @@ class Property(models.Model):
     street_number = models.PositiveSmallIntegerField(default=0)
     street_address = models.CharField(max_length=150)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
 
     def __str__(self):
         return self.property_name + '. CITY: ' + self.city.city_name\
@@ -42,5 +46,5 @@ class Agent(models.Model):
     # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
     office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
 
-
-
+    def __str__(self):
+        return self.agent_name
