@@ -27,8 +27,8 @@ class Property(models.Model):
     def __str__(self):
         return self.property_name + '. CITY: ' + self.city.city_name\
 
+    # Returns agent/s as a string for this property - used in admin.py to display agent/s next to property.
     def display_agent(self):
-        #Create a string for the Agent/s. Required for displaying agent in property list_detail.
         agents = self.agent_set.all()
         return (', ').join(agent.agent_name for agent in agents)
 
