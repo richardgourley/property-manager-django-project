@@ -29,7 +29,7 @@ class Property(models.Model):
     street_number = models.PositiveSmallIntegerField(default=0)
     street_address = models.CharField(max_length=150)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
 
     def __str__(self):
         return self.property_name + '. CITY: ' + self.city.city_name\
@@ -48,3 +48,5 @@ class Agent(models.Model):
 
     def __str__(self):
         return self.agent_name
+
+
