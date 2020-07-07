@@ -28,10 +28,9 @@ class Property(models.Model):
         return self.property_name + '. CITY: ' + self.city.city_name\
 
     def display_agent(self):
-        #Create a string for the Agent. Required for displaying agent in property list_detail.
-        agents = Property.objects.filter(agent_id=self.id)
-        return (', ').join(agent.name for agent in agents)
-
+        #Create a string for the Agent/s. Required for displaying agent in property list_detail.
+        agents = self.agent_set.all()
+        return (', ').join(agent.agent_name for agent in agents)
 
 class Agent(models.Model):
     agent_name = models.CharField(max_length=150)
