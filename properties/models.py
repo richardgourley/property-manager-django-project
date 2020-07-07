@@ -32,7 +32,7 @@ class Property(models.Model):
     price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
 
     def __str__(self):
-        return self.property_name + '. CITY: ' + self.city.city_name\
+        return self.property_name
 
     # Returns agent/s as a string for this property - used in admin.py to display agent/s next to property.
     def display_agent(self):
@@ -48,5 +48,7 @@ class Agent(models.Model):
 
     def __str__(self):
         return self.agent_name
+
+
 
 
