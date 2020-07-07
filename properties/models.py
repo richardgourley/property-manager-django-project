@@ -6,6 +6,9 @@ class Office(models.Model):
     address = models.TextField(blank=False)
 
 class City(models.Model):
+    class Meta:
+        verbose_name = 'city'
+        verbose_name_plural = 'cities'
     city_name = models.CharField(max_length=150)
 
     def __str__(self):
@@ -38,4 +41,6 @@ class Agent(models.Model):
     property = models.ManyToManyField(Property)
     # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
     office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
+
+
 
