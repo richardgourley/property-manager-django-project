@@ -1,5 +1,10 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
-    <h3 style="font-family:arial; color:blue;">HI I AM THE PROPERTY INDEX PAGE!!!</h3>
+<h1>Our most recent properties</h1>
+
+{% for p in latest_properties %}
+    <h2>{{ p.property_name }}</h2>
+{% endfor %}
+
 {% endblock %}
