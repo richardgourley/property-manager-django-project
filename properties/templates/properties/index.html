@@ -4,7 +4,15 @@
 <h1>Our most recent properties</h1>
 
 {% for p in latest_properties %}
-    <h2>{{ p.property_name }}</h2>
+    <div style="border:2px solid lightgrey; margin:8px; padding:17px;">
+        <h2>{{ p.property_name }}</h2>
+        <h3>Bedrooms: {{ p.bedrooms }}</h3>
+        <h3>Bathrooms: {{ p.bathrooms }}</h3>
+        <h3>Description:</h3>
+        <p>{{ p.description }}</p>
+        <p><strong>CITY/ TOWN: </strong>{{ p.city }}</p>
+        <p><strong>PRICE: </strong>${{ p.price }} pcm</p>
+    </div>
 {% endfor %}
 
 {% endblock %}
