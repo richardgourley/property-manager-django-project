@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Property, Office
+from .models import Property, City
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -9,8 +9,8 @@ class IndexView(generic.ListView):
 
 	def get_queryset(self):
 		properties = Property.objects.all().order_by('-pub_date')[:5]
-		offices = Office.objects.all()
-		return {'properties':properties, 'offices':offices}
+		cities = City.objects.all()
+		return {'properties':properties, 'cities':cities}
 
 class PropertyDetailView(generic.DetailView):
 	model = Property
