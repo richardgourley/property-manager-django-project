@@ -8,4 +8,4 @@ class IndexView(generic.ListView):
 	context_object_name = 'latest_properties'
 
 	def get_queryset(self):
-		return Property.objects.all()
+		return Property.objects.all().order_by('-pub_date')[:2]
