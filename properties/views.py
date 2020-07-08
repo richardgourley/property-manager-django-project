@@ -9,10 +9,3 @@ class IndexView(generic.ListView):
 
 	def get_queryset(self):
 		return Property.objects.all().order_by('-pub_date')[:5]
-
-class FooterView(generic.ListView):
-	template_name = 'properties/footer.html'
-	context_object_name = 'offices'
-
-	def get_queryset(self):
-		return Office.objects.all()
