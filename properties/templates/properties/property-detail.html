@@ -1,0 +1,26 @@
+{% extends 'properties/base.html' %}
+
+{% block content %}
+
+<h1>{{ property.property_name }}</h1>
+<p><small>ADDED ON: {{ property.pub_date }}</small></p>
+<div style="border:1px solid lightgrey; padding:15px;">
+    <h4>CITY: {{ property.city }}</h4>
+    <h3>BEDROOMS: {{ property.bedrooms }}</h3>
+    <h3>BATHROOMS: {{ property.bathrooms }}</h3>
+    <h3>DESCRIPTION:</h3>
+    <p>{{ property.description }}</p>
+    <h2>PRICE: ${{ property.price }} pcm</h2>
+</div>
+
+<div style="background-color:grey; color:white; padding:15px;">
+    <h3>Interested in this flat?</h3>
+    <p>Our agents are ready and waiting to show you around!</p>
+    {% for agent in property.agent_set.all %}
+        <h3>AGENT NAME: {{ agent.agent_name }}</h3>
+        <h3>OFFICE LOCATION: {{ agent.office }}</h3>
+        <p>EMAIL: {{ agent.email }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
