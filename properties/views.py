@@ -5,7 +5,7 @@ from .models import Property, City
 # Create your views here.
 class IndexView(generic.ListView):
 	template_name = 'properties/index.html'
-	context_object_name = 'properties_and_offices'
+	context_object_name = 'properties_and_cities'
 
 	def get_queryset(self):
 		properties = Property.objects.all().order_by('-pub_date')[:5]
