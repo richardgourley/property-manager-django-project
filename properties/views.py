@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Property, City
+from .models import Property, City,Office
 from .forms import QuickPropertySearchForm
 
 # Create your views here.
@@ -16,7 +16,7 @@ class PropertyDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Property.objects.all()
-    
+
 def quick_property_search(request):
     if request.method == 'POST':
         form = QuickPropertySearchForm(request.POST)
@@ -29,3 +29,10 @@ def quick_property_search(request):
         form = QuickPropertySearchForm()
 
     return render(request, 'properties/quick-property-search.html', {'search_results':'', 'message':'', 'form':form})
+
+class LocationsView(generic.ListView):
+    template_name = 'properties/locations.html'
+    context_object_name = 'offices'
+
+    def get_queryset(self):
+        return Office.objects.all()
