@@ -1,20 +1,18 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Property, City
+from .forms import QuickPropertySearchForm
 
 # Create your views here.
-class IndexView(generic.ListView):
-	template_name = 'properties/index.html'
-	context_object_name = 'properties_and_cities'
-
-	def get_queryset(self):
-		properties = Property.objects.all().order_by('-pub_date')[:5]
-		cities = City.objects.all()
-		return {'properties':properties, 'cities':cities}
+def index(request):
+    properties = Property.objects.all().order_by('-pub_date')[:5]
+    cities = City.objects.all()
+    form = QuickPropertySearchForm()
+    return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
 class PropertyDetailView(generic.DetailView):
-	model = Property
-	template_name = 'properties/property-detail.html'
+    model = Property
+    template_name = 'properties/property-detail.html'
 
-	def get_queryset(self):
-		return Property.objects.all()
+    def get_queryset(self):
+        return Property.objects.all()
