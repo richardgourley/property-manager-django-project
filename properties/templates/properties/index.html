@@ -1,9 +1,19 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
+<h2>Quick search!</h2>
+<p>Choose a town or city to start your search!</p>
+
+<form action="{% url 'properties:quick_property_search' %}" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Search properties!">
+</form>
+
+
 <h1>Our most recent properties</h1>
 
-{% for p in latest_properties %}
+{% for p in properties %}
     <div style="border:2px solid lightgrey; margin:14px;">
     	<div style="padding:12px;">
 	        <h2>{{ p.property_name }}</h2>
