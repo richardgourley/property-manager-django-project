@@ -4,7 +4,7 @@ from .models import City
 class QuickPropertySearchForm(forms.Form):
 	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label="SELECT A CITY")
 
-class AdvancedSearchForm(forms.Form):
+class AdvancedPropertySearchForm(forms.Form):
 	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label="SELECT A CITY")
 	max_price = forms.ChoiceField([
 		('1400','1400'),
