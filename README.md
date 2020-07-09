@@ -20,6 +20,7 @@ This is a property manager system for a website.  It incorporates many models re
 - Reverse many to many queries using object.object_set.all()
 - Foreign keys
 - Verbose plural names added to models to fix admin display issue - 'Citys', 'Propertys' etc.
+- FORMS - dynamically created fields using ModelChoiceField
 - Defining __str__ for all model names to give human readable names in admin.
 
 
