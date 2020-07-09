@@ -16,3 +16,16 @@ class PropertyDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Property.objects.all()
+    
+def quick_property_search(request):
+    if request.method == 'POST':
+        form = QuickPropertySearchForm(request.POST)
+        if form.is_valid():
+            city_name = form.cleaned_data['city']
+            search_results = Property.objects.filter(city=city_name)
+            message = "We found 1 matching result" if len(search_results) == 1 else "We found {} matching results.".format(len(search_results))
+            return render(request, 'properties/quick-property-search.html', {'search_results':search_results, 'message':message, 'form':form})
+    else:
+        form = QuickPropertySearchForm()
+
+    return render(request, 'properties/quick-property-search.html', {'search_results':'', 'message':'', 'form':form})
