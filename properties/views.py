@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Property, City,Office
+from .models import Property, City,Office, Agent
 from .forms import QuickPropertySearchForm
 
 # Create your views here.
@@ -36,3 +36,10 @@ class LocationsView(generic.ListView):
 
     def get_queryset(self):
         return Office.objects.all()
+
+class AgentsView(generic.ListView):
+    template_name = 'properties/agents.html'
+    context_object_name = 'agents'
+
+    def get_queryset(self):
+        return Agent.objects.filter().order_by('office')
