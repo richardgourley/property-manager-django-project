@@ -1,0 +1,40 @@
+{% extends 'properties/base.html' %}
+
+{% block content %}
+<h2>Quick Property Search</h2>
+<form action="{% url 'properties:quick_property_search' %}" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Search properties!">
+</form>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+{% if search_results %}
+    {% for p in search_results %}
+	    <div style="border:2px solid lightgrey; margin:14px;">
+	    	<div style="padding:12px;">
+		        <h2>{{ p.property_name }}</h2>
+		        <h3>Bedrooms: {{ p.bedrooms }}</h3>
+		        <h3>Bathrooms: {{ p.bathrooms }}</h3>
+		        <h3>Description:</h3>
+		        <p>{{ p.description }}</p>
+		        <p><strong>CITY/ TOWN: </strong>{{ p.city }}</p>
+		        <p><strong>PRICE: </strong>${{ p.price }} pcm</p>
+		        <button>View this property!</button>
+	        </div>
+	        <div style="background-color:lightgrey; padding:12px;">
+	            <h3>Contact:</h3>
+	            {% for agent in p.agent_set.all %}
+	                <p>NAME: {{ agent.agent_name }}</p>
+	                <p>EMAIL: {{ agent.email }}</p>
+	                <p>OFFICE: {{ agent.office }}</p>
+	            {% endfor %}
+	        </div>
+	    </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
