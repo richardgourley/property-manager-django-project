@@ -1,0 +1,17 @@
+{% extends 'properties/base.html' %}
+
+{% block content %}
+    <h1>Meet the team!</h1>
+    <p>Our team of professionals are on hand to help you find your perfect property rental!</p>
+    
+    {% for a in agents %}
+    <div style="border:2px solid lightgrey; margin:14px;">
+        <div style="padding:12px;">
+            <h2>{{ a.agent_name }}</h2>
+            <p>{{ a.email }}</p>
+            <p>{{ a.office }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
