@@ -1,0 +1,21 @@
+{% extends 'properties/base.html' %}
+
+{% block content %}
+    <h1>Our office locations</h1>
+    <p>Get in touch or come and see us in person to find your perfect property rental!</p>
+    
+    {% for o in offices %}
+    <div style="border:2px solid lightgrey; margin:14px;">
+        <div style="padding:12px;">
+            <h2>{{ o.office_name }}</h2>
+            <p>{{ o.address }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div style="background-color:grey; color:white; margin:14px; padding:12px">
+        <p>Our agents are ready and willing to help you!</p>
+        <h2 style="color:white;">Click below to meet the team!</h2>
+        <button>See our agents</button>
+    </div>
+{% endblock %}
