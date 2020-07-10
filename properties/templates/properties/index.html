@@ -14,14 +14,6 @@
     </div>
 </div>
 
-<div class="container pt-5 pb-5 text-center">
-    <h1 class="text-muted display">Try our advanced search!</h1>
-    <p class="text-muted">Filter our properties based on location, number of bedrooms and
-    minimum price</p>
-    <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
-
-</div>
-
 <div class="container pt-3">
     <h1 class="text-muted">Newest properties</h1>
 
@@ -46,7 +38,7 @@
                 </div>
                 <div class="col-md-4 bg-light">
                     <div class="card-body">
-                        <h4 class="card-title">CONTACT</h4>
+                        <h4 class="card-title text-muted">CONTACT</h4>
                         {% for agent in p.agent_set.all %}
                         <p class="card-title">NAME: {{ agent.agent_name }}</p>
                         <p class="card-text">EMAIL: {{ agent.email }}</p>
@@ -64,7 +56,18 @@
 
 </div>
 
+<div class="container pt-5 pb-5 text-center">
+    <h1 class="text-muted display">Try our advanced search!</h1>
+    <p class="text-muted">Filter our properties based on location, number of bedrooms and
+    minimum price</p>
+    <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
+</div>
+
 {% endblock %}
+
+
+
+
 
 
 
