@@ -50,6 +50,7 @@
                         <p class="card-text">OFFICE: {{ agent.office}}</p>
                         {% endfor %}
                         <hr>
+                        <h5 class="card-text">PRICE: ${{ p.price }} pcm</h5>
                         <a href="{% url 'properties:property_display' p.id %}">
                             <button class="btn btn-success border-white">See more!</button>
                         </a>
@@ -62,4 +63,5 @@
 {% endif %}
 
 {% endblock %}
+
 
