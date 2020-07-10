@@ -1,39 +1,61 @@
-<style>
-body{
-	font-family:arial;
-}
-h1{
-	color:grey;
-}
-h2{
-	color:grey;
-}
-</style>
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<h1>Welcome to our Properties Website</h1>
-<p>We have lots of properties available to rent!</p>
+        <!-- Bootstrap css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-{% include 'properties/navbar.html' %}
+        <!-- Font Awesone CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-<div class="container">
-  {% block content %}
-  {% endblock %}
-</div>
+        <!-- Our CSS File -->
+        <link rel="stylesheet" type="text/css" href="{% static 'properties/style.css' %}">
 
-<!--- FOOTER --->
-<div style="background-color:grey; padding:12px; margin:12px; color:white; font-size:90%">
-    <ul>
-        <li>Home</li>
-        <li>Properties</li>
-        <li>Properties in City1</li>
-        <li>Properties in City2</li>
-        <li>Property Search</li>
-    </ul>
-    <h3>Our offices</h3>
-	<h4>City1</h4>
-	<p>Address</p>
-	<h4>City2</h4>
-    <p>Address</p>
-</div>
+        
+
+        <title>Property Rentals</title>
+    </head>
+    <body>
+
+    <!-- NAVBAR -->
+    {% include 'properties/navbar.html' %}
+
+    
+
+    <!-- PAGE CONTENT-->
+    {% block content %}
+    {% endblock %}
+
+
+    <!--- FOOTER --->
+
+    <div class="container-fluid bg-secondary">
+        <div class="container text-white pt-5 pb-5">
+            <div style="font-size:90%">
+                <ul>
+                    <li><a class="text-white" href="{% url 'properties:index' %}">Home</a></li>
+                    <li><a class="text-white" href="{% url 'properties:agents' %}">Meet The Team</a></li>
+                    <li><a class="text-white" href="{% url 'properties:locations' %}">Our Locations</a></li>
+                    <li><a class="text-white" href="{% url 'properties:advanced_property_search' %}">Advanced Search</a></li>
+                    <li><a class="text-white" href="{% url 'properties:quick_property_search' %}">Quick search - by city</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+    <!--- Bootstrap JS files for adding jQuery, popper.js and bootstrap.min.js from a CDN --->
+    <script src="bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </body>
+</html>
+
+
 
 
