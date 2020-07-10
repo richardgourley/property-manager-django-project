@@ -2,27 +2,40 @@
 
 {% block content %}
 
-<div class="container-fluid text-white bg-primary">
-    <div class="container text-center pt-5 pb-5">
+<div class="container-fluid text-white bg-primary shadow">
+    <div class="container text-center justify-content-center pt-5 pb-5">
         <h1>Quick search!</h1>
         <p>Choose a town or city to start your search!</p>
         <form action="{% url 'properties:quick_property_search' %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <input class="btn btn-success border-white" type="submit" value="Search properties!">
+        <input class="text-center btn btn-success border-white" type="submit" value="Search properties!">
         </form>
     </div>
 </div>
 
 <div class="container pt-5 pb-5 text-center">
-    <h1 class="text-muted">Try our advanced search!</h1>
+    <h1 class="text-muted display">Try our advanced search!</h1>
     <p class="text-muted">Filter our properties based on location, number of bedrooms and
     minimum price</p>
     <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
+
+    <div style="height: 100px; background-color: rgba(255,0,0,0.1);">
+      <div class="mh-100" style="width: 100px; height: 200px; background-color: rgba(0,0,255,0.1);">Max-height 100%</div>
+    </div>
 </div>
 
 <div class="container pt-3">
     <h1 class="text-muted">Newest properties</h1>
+
+    {% for p in properties %}
+        <div class="card mb-3">
+            <div class="card-img-top bg-light" style="width:200px; height:200px;">
+                <p>Testing</p>
+            </div>
+            <h1>I am a card</h1>
+        </div>
+    {% endfor %}
 
     {% for p in properties %}
         <div style="border:2px solid lightgrey; margin:14px;">
@@ -52,6 +65,10 @@
 
 
 {% endblock %}
+
+
+
+
 
 
 
