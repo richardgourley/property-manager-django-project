@@ -7,7 +7,12 @@
         <p>Choose from the options below to find your perfect property!</p>
         <form action="{% url 'properties:advanced_property_search' %}" method="post">
         {% csrf_token %}
-        {{ form }}
+        {% for item in form %}
+            <div class="form-group">
+            {{ item.label }}
+            {{ item }}
+            </div>
+        {% endfor %}
         <input class="text-center btn btn-success border-white" type="submit" value="Search properties!">
         </form>
     </div>
