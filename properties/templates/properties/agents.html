@@ -1,17 +1,66 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
-    <h1>Meet the team!</h1>
-    <p>Our team of professionals are on hand to help you find your perfect property rental!</p>
-    
-    {% for a in agents %}
-    <div style="border:2px solid lightgrey; margin:14px;">
-        <div style="padding:12px;">
-            <h2>{{ a.agent_name }}</h2>
-            <p>{{ a.email }}</p>
-            <p>{{ a.office }}</p>
-        </div>
+<div class="container-fluid text-white bg-primary shadow">
+    <div class="container text-center justify-content-center pt-5 pb-5">
+        <h1>Quick search!</h1>
+        <p>Choose a town or city to start your search!</p>
+        <form action="{% url 'properties:quick_property_search' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="text-center btn btn-success border-white" type="submit" value="Search properties!">
+        </form>
     </div>
+</div>
+
+
+{% if message %}
+    <div class="alert alert-primary" role="alert">
+	    {{ message }}
+	</div>
+{% endif %}
+
+{% if search_results %}
+    <div class="container pt-4">
+    {% for p in search_results %}
+	    <div class="card mb-3 shadow-sm">
+            <div class="row no-gutters">
+                <div class="col-md-4 col-lg-2 bg-light" style="width:100%; height:200px">
+                    Image
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                        <a href="{% url 'properties:property_display' p.id %}" >{{ p.property_name }}</a>
+                        </h3>
+                        <p class="card-text"><strong>CITY/ TOWN: {{ p.city }}</strong></p>
+                        <p class="card-text">{{ p.description}}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Bedrooms: {{ p.bedrooms }}</li>
+                            <li class="list-group-item">Bathrooms: {{ p.bathrooms }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 bg-light">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">CONTACT</h4>
+                        {% for agent in p.agent_set.all %}
+                        <p class="card-title">NAME: {{ agent.agent_name }}</p>
+                        <p class="card-text">EMAIL: {{ agent.email }}</p>
+                        <p class="card-text">OFFICE: {{ agent.office}}</p>
+                        {% endfor %}
+                        <hr>
+                        <h5 class="card-text">PRICE: ${{ p.price }} pcm</h5>
+                        <a href="{% url 'properties:property_display' p.id %}">
+                            <button class="btn btn-success border-white">See more!</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+    </div>
+{% endif %}
 
 {% endblock %}
+
