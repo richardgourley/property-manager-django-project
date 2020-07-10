@@ -21,8 +21,8 @@
     <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
 </div>
 
-<div class="container">
-    <h1>Our most recent properties</h1>
+<div class="container pt-3">
+    <h1 class="text-muted">Our most recent properties</h1>
 
     {% for p in properties %}
         <div style="border:2px solid lightgrey; margin:14px;">
@@ -52,6 +52,10 @@
 
 
 {% endblock %}
+
+
+
+
 
 
 
