@@ -1,21 +1,33 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
-    <h1>Our office locations</h1>
-    <p>Get in touch or come and see us in person to find your perfect property rental!</p>
-    
-    {% for o in offices %}
-    <div style="border:2px solid lightgrey; margin:14px;">
-        <div style="padding:12px;">
-            <h2>{{ o.office_name }}</h2>
-            <p>{{ o.address }}</p>
-        </div>
+<div class="container-fluid text-white bg-primary shadow">
+    <div class="container text-center justify-content-center pt-5 pb-5">
+        <h1>Our office locations</h1>
+        <p>Get in touch or come and see us in person to find your perfect property rental!</p>
     </div>
-    {% endfor %}
+</div>
 
-    <div style="background-color:grey; color:white; margin:14px; padding:12px">
-        <p>Our agents are ready and willing to help you!</p>
-        <h2 style="color:white;">Click below to meet the team!</h2>
-        <button>See our agents</button>
+<div class="container pt-5">
+    <div class="row">
+    {% for o in offices %}
+        <div class="col-sm-6">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">{{ o.office_name }}</h2>
+                    <p class="card-text">{{ o.address|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+    
+    {% endfor %}
     </div>
+</div>
+
+<div class="container pt-5 pb-5 text-center">
+    <h1 class="text-muted">Ready to meet the team?</h1>
+    <p class="text-muted">Our agents are ready and willing to help you!</p>
+    <a href="{% url 'properties:agents' %}"><button class="btn btn-primary">See our agents!</button></a>
+</div>
+
 {% endblock %}
