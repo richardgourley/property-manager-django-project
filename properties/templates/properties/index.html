@@ -1,41 +1,58 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
-<h2>Quick search!</h2>
-<p>Choose a town or city to start your search!</p>
 
-<form action="{% url 'properties:quick_property_search' %}" method="post">
-{% csrf_token %}
-{{ form }}
-<input type="submit" value="Search properties!">
-</form>
-
-
-<h1>Our most recent properties</h1>
-
-{% for p in properties %}
-    <div style="border:2px solid lightgrey; margin:14px;">
-    	<div style="padding:12px;">
-	        <h2>{{ p.property_name }}</h2>
-	        <h3>Bedrooms: {{ p.bedrooms }}</h3>
-	        <h3>Bathrooms: {{ p.bathrooms }}</h3>
-	        <h3>Description:</h3>
-	        <p>{{ p.description }}</p>
-	        <p><strong>CITY/ TOWN: </strong>{{ p.city }}</p>
-	        <p><strong>PRICE: </strong>${{ p.price }} pcm</p>
-	        <button>View this property!</button>
-        </div>
-        <div style="background-color:lightgrey; padding:12px;">
-            <h3>Contact:</h3>
-            {% for agent in p.agent_set.all %}
-                <p>NAME: {{ agent.agent_name }}</p>
-                <p>EMAIL: {{ agent.email }}</p>
-                <p>OFFICE: {{ agent.office }}</p>
-            {% endfor %}
-        </div>
+<div class="container-fluid text-white bg-primary">
+    <div class="container text-center pt-5 pb-5">
+        <h1>Quick search!</h1>
+        <p>Choose a town or city to start your search!</p>
+        <form action="{% url 'properties:quick_property_search' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-success border-white" type="submit" value="Search properties!">
+        </form>
     </div>
-{% endfor %}
+</div>
 
-<button>Click here to search all of our properties!</button>
+<div class="container pt-5 pb-5 text-center">
+    <h1 class="text-muted">Try our advanced search!</h1>
+    <p class="text-muted">Filter our properties based on location, number of bedrooms and
+    minimum price</p>
+    <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
+</div>
+
+<div class="container">
+    <h1>Our most recent properties</h1>
+
+    {% for p in properties %}
+        <div style="border:2px solid lightgrey; margin:14px;">
+        	<div style="padding:12px;">
+    	        <h2>{{ p.property_name }}</h2>
+    	        <h3>Bedrooms: {{ p.bedrooms }}</h3>
+    	        <h3>Bathrooms: {{ p.bathrooms }}</h3>
+    	        <h3>Description:</h3>
+    	        <p>{{ p.description }}</p>
+    	        <p><strong>CITY/ TOWN: </strong>{{ p.city }}</p>
+    	        <p><strong>PRICE: </strong>${{ p.price }} pcm</p>
+    	        <a href="{% url 'properties:property_display' p.id %}">
+                    <button>View this property!</button>
+                </a>
+            </div>
+            <div style="background-color:lightgrey; padding:12px;">
+                <h3>Contact:</h3>
+                {% for agent in p.agent_set.all %}
+                    <p>NAME: {{ agent.agent_name }}</p>
+                    <p>EMAIL: {{ agent.email }}</p>
+                    <p>OFFICE: {{ agent.office }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 
 {% endblock %}
+
+
+
+
