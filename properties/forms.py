@@ -2,10 +2,10 @@ from django import forms
 from .models import City
 
 class QuickPropertySearchForm(forms.Form):
-	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label="SELECT A CITY")
+	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label=None)
 
 class AdvancedPropertySearchForm(forms.Form):
-	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label="SELECT A CITY")
+	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label=None)
 	max_price = forms.ChoiceField(choices=[
 		('1300','1300'),
 		('1200','1200'),
@@ -20,3 +20,4 @@ class AdvancedPropertySearchForm(forms.Form):
         ('2','2'),
         ('3','3'),
 	])
+
