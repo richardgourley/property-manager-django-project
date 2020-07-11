@@ -66,6 +66,18 @@ class ModelTests(TestCase):
         # Assign property1 to "Bob" agent1
         agent1.property.add(property1)
         self.assertQuerysetEqual(agent1.property.all(), ['<Property: Lovely new flat>'])
+        
+    def test_after_agent_deletion_property_cant_access_agent(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        office1 = create_office("Berlin", "Main St")
+        agent1 = create_agent("Bob", "bob@mail.com", office1)
+        # Assign property1 to "Bob" agent1
+        agent1.property.add(property1)
+        agent1.delete()
+        self.assertQuerysetEqual(property1.agent_set.all(), [])
 
 
 
