@@ -93,7 +93,7 @@ class ModelTests(TestCase):
 '''
 VIEW TESTS
 '''
-# Need to test that 0 properties returns a message
+
 class IndexTests(TestCase):
     def setup(self):
         self.client = Client
@@ -104,27 +104,55 @@ class IndexTests(TestCase):
         contains = 'Welcome to Property Rentals' in str(response.content)
         self.assertIs(contains, True)
 
-    def test_if_0_properties_coming_soon_message_appears(self):
+    # Need to test that 0 properties returns a message
+    def test_0_properties_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:index'))
-        contains = 'coming soon' in str(response.content)
-        self.assertIs(contains, True)
+        self.assertIn("coming soon", str(response.content))
 
-# Test returns 404 if pub_date is in future
 # Test that a generic email is given to organize viewings IF no agent is assigned
 class PropertyDetailViewTests(TestCase):
-    pass
+    # Test returns 404 if pub_date is in future
+    def test_404_returned_if_pub_date_in_future(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+        )
+        response = self.client.get(reverse('properties:property_detail', args=(property1.id,)))
+        self.assertEqual(response.status_code, 404)
 
-# Test that 0 properties returns a message in page
+    # Test that a generic email is given to organize viewings IF no agent is assigned
+    def test_generic_email_given_if_no_agent_assigned(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+        )
+        response = self.client.get(reverse('properties:property_detail', args=(property1.id,)))
+        self.assertIn("info@mail.com", str(response.content))
+
 class QuickPropertySearchTests(TestCase):
-    pass
+    # Test that 0 properties returns a message in page
+    def test_0_properties_returns_coming_soon_message(self):
+        response = self.client.get(reverse('properties:quick_property_search'))
+        self.assertIn("coming soon", str(response.content))
 
-# Test 0 offices displays a message
 class LocationViewTests(TestCase):
-    pass
+    # Test 0 offices displays a message
+    def test_0_offices_returns_coming_soon_message(self):
+        response = self.client.get(reverse('properties:locations'))
+        self.assertIn("coming soon", str(response.content))
 
-# Test 0 agents displays a message
 class AgentsViewTests(TestCase):
-    pass
+    # Test 0 agents displays a message
+    def test_0_agents_returns_generic_email_contact_address(self):
+        response = self.client.get(reverse('properties:locations'))
+        self.assertIn("info@mail.com", str(response.content))
+
+
+
+
+
+
+
 
 
 
