@@ -38,9 +38,15 @@ class ModelTests(TestCase):
         )
         self.assertEqual(type(property1), Property)
 
-    def test_city_name_rejects_numbers(self):
-        city = create_city("1234")
-        self.assertEqual(city.name)
+    def test_city_name_is_string(self):
+        city = create_city("Berlin")
+        self.assertEqual(type(city.city_name), str)
+
+
+
+
+
+
 
 
 
