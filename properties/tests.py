@@ -42,6 +42,7 @@ class ModelTests(TestCase):
         city = create_city("Berlin")
         self.assertEqual(type(city.city_name), str)
 
+        # FOREIGN KEY TESTS
     def test_deleting_property_doesnt_delete_city(self):
         city1 = create_city("Berlin")
         property1 = create_property(
@@ -53,6 +54,18 @@ class ModelTests(TestCase):
         property1.delete()
         property2.delete()
         self.assertEqual(city1.city_name, "Berlin")
+    
+    # MANY TO MANY RELATIONSHIP TESTS
+    def test_assigning_property_to_agent_works(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        office1 = create_office("Berlin", "Main St")
+        agent1 = create_agent("Bob", "bob@mail.com", office1)
+        # Assign property1 to "Bob" agent1
+        agent1.property.add(property1)
+        self.assertQuerysetEqual(agent1.property.all(), ['<Property: Lovely new flat>'])
 
 
 
