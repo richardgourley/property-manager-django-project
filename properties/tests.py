@@ -94,9 +94,20 @@ class ModelTests(TestCase):
 VIEW TESTS
 '''
 # Need to test that 0 properties returns a message
-# Test if 0 cities then we display a 'welcome message' instead of quick search
 class IndexTests(TestCase):
-    pass
+    def setup(self):
+        self.client = Client
+
+    # Test if 0 cities then we display a 'welcome message' instead of quick search
+    def test_if_0_cities_displays_welcome_message_not_quick_search(self):
+        response = self.client.get(reverse('properties:index'))
+        contains = 'Welcome to Property Rentals' in str(response.content)
+        self.assertIs(contains, True)
+
+    def test_if_0_properties_coming_soon_message_appears(self):
+        response = self.client.get(reverse('properties:index'))
+        contains = 'coming soon' in str(response.content)
+        self.assertIs(contains, True)
 
 # Test returns 404 if pub_date is in future
 # Test that a generic email is given to organize viewings IF no agent is assigned
@@ -114,6 +125,13 @@ class LocationViewTests(TestCase):
 # Test 0 agents displays a message
 class AgentsViewTests(TestCase):
     pass
+
+
+
+
+
+
+
 
 
 
