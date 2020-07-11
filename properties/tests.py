@@ -13,7 +13,7 @@ def create_office(office_name, address):
 def create_city(city_name):
     return City.objects.create(city_name = city_name)
 
-def create_agent(agent_name, email, property, office):
+def create_agent(agent_name, email, office):
     return Agent.objects.create(agent_name = agent_name, email = email, office = office)
 
 def create_property(property_name,bedrooms,bathrooms,description,pub_date,street_number,street_address,city,price):
@@ -42,7 +42,7 @@ class ModelTests(TestCase):
         city = create_city("Berlin")
         self.assertEqual(type(city.city_name), str)
 
-        # FOREIGN KEY TESTS
+    # FOREIGN KEY TESTS
     def test_deleting_property_doesnt_delete_city(self):
         city1 = create_city("Berlin")
         property1 = create_property(
@@ -53,7 +53,13 @@ class ModelTests(TestCase):
         )
         property1.delete()
         property2.delete()
-        self.assertEqual(city1.city_name, "Berlin")
+        self.assertTrue(city1)
+
+    def test_deleting_office_doesnt_delete_agent(self):
+        office1 = create_office("Berlin", "Main St")
+        agent1 = create_agent("Bob", "bob@mail.com", office1)
+        office1.delete()
+        self.assertTrue(agent1)
     
     # MANY TO MANY RELATIONSHIP TESTS
     def test_assigning_property_to_agent_works(self):
@@ -66,7 +72,7 @@ class ModelTests(TestCase):
         # Assign property1 to "Bob" agent1
         agent1.property.add(property1)
         self.assertQuerysetEqual(agent1.property.all(), ['<Property: Lovely new flat>'])
-        
+
     def test_after_agent_deletion_property_cant_access_agent(self):
         city1 = create_city("Berlin")
         property1 = create_property(
@@ -78,16 +84,6 @@ class ModelTests(TestCase):
         agent1.property.add(property1)
         agent1.delete()
         self.assertQuerysetEqual(property1.agent_set.all(), [])
-
-
-
-
-
-
-
-
-
-
 
 
 
