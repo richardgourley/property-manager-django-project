@@ -6,7 +6,9 @@ from django.utils import timezone
 
 from .models import Office, City, Property, Agent
 
-# Functions that create object instances for testing
+'''
+OBJECT INSTANCES FOR TESTING
+'''
 def create_office(office_name, address):
     return Office.objects.create(office_name = office_name, address = address)
 
@@ -29,7 +31,9 @@ def create_property(property_name,bedrooms,bathrooms,description,pub_date,street
         price = price    
     )
 
-# Classes that test models
+'''
+MODEL TESTS
+'''
 class ModelTests(TestCase):
     def test_property_instance_is_type_property(self):
         city1 = create_city("Berlin")
@@ -84,6 +88,38 @@ class ModelTests(TestCase):
         agent1.property.add(property1)
         agent1.delete()
         self.assertQuerysetEqual(property1.agent_set.all(), [])
+
+
+'''
+VIEW TESTS
+'''
+# Need to test that 0 properties returns a message
+# Test if 0 cities then we display a 'welcome message' instead of quick search
+class IndexTests(TestCase):
+    pass
+
+# Test returns 404 if pub_date is in future
+# Test that a generic email is given to organize viewings IF no agent is assigned
+class PropertyDetailViewTests(TestCase):
+    pass
+
+# Test that 0 properties returns a message in page
+class QuickPropertySearchTests(TestCase):
+    pass
+
+# Test 0 offices displays a message
+class LocationViewTests(TestCase):
+    pass
+
+# Test 0 agents displays a message
+class AgentsViewTests(TestCase):
+    pass
+
+
+
+
+
+
 
 
 
