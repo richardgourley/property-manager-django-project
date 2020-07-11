@@ -29,6 +29,25 @@ def create_property(property_name,bedrooms,bathrooms,description,pub_date,street
         price = price    
 	)
 
+# Classes that test models
+class ModelTests(TestCase):
+    def test_property_instance_is_type_property(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        self.assertEqual(type(property1), Property)
+
+    def test_city_name_rejects_numbers(self):
+        city = create_city("1234")
+        self.assertEqual(city.name)
+
+
+
+
+
+
+
 
 
 
