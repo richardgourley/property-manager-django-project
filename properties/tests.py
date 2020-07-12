@@ -124,8 +124,16 @@ class IndexTests(TestCase):
         self.assertQuerysetEqual(response.context['properties'], [])
 
 
-# Test that a generic email is given to organize viewings IF no agent is assigned
 class PropertyDetailViewTests(TestCase):
+    # Test response status is 200 for property with pub_date in past
+    def test_200_returned_if_pub_date_is_now_or_past(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        response = self.client.get(reverse('properties:property_detail', args=(property1.id,)))
+        self.assertEqual(response.status_code, 200)
+
     # Test returns 404 if pub_date is in future
     def test_404_returned_if_pub_date_in_future(self):
         city1 = create_city("Berlin")
@@ -161,13 +169,5 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:locations'))
         self.assertIn("info@mail.com", str(response.content))
-
-
-
-
-
-
-
-
 
 
