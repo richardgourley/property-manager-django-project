@@ -98,6 +98,11 @@ class IndexTests(TestCase):
     def setup(self):
         self.client = Client
 
+    # Test 200 response status for home page
+    def test_200_response_index_property_page(self):
+        response = self.client.get(reverse('properties:index'))
+        self.assertEqual(response.status_code, 200)
+
     # Test if 0 cities then we display a 'welcome message' instead of quick search
     def test_if_0_cities_displays_welcome_message_not_quick_search(self):
         response = self.client.get(reverse('properties:index'))
@@ -156,6 +161,13 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:locations'))
         self.assertIn("info@mail.com", str(response.content))
+
+
+
+
+
+
+
 
 
 
