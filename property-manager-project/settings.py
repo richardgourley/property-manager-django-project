@@ -16,7 +16,7 @@ INSTALLED_APPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lessonvocabularyapp',
+        'NAME': 'property_manager-project',
         'USERNAME':'username',
         'PASSWORD':'password',
         'HOST':'127.0.0.1',
