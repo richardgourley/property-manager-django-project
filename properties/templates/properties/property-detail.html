@@ -30,12 +30,18 @@
 
 <div class="container text-center pt-4 pb-4 mb-3 bg-light">
     <h2 class="text-muted">Arrange a viewing!</h2>
-    {% for agent in property.agent_set.all %}
-        <p class="text-muted">AGENT NAME: {{ agent.agent_name }}</p>
-        <p class="text-muted">OFFICE LOCATION: {{ agent.office }}</p>
-        <p class="text-muted">EMAIL: {{ agent.email }}</p>
+    {% if property.agent_set.all|length_is:"0" %}
+        <p class="text-muted">EMAIL: info@mail.com</p>
         <hr>
-    {% endfor %}
+    {% else %}
+        {% for agent in property.agent_set.all %}
+            <p class="text-muted">AGENT NAME: {{ agent.agent_name }}</p>
+            <p class="text-muted">OFFICE LOCATION: {{ agent.office }}</p>
+            <p class="text-muted">EMAIL: {{ agent.email }}</p>
+            <hr>
+        {% endfor %}
+    {% endif %}
+
 </div>
 
 {% endblock %}
