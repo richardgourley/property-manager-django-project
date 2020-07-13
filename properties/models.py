@@ -46,9 +46,11 @@ class Agent(models.Model):
     # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
     office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
 
+    '''
+    Return the office name next to the agent - helps in defining agents in admin page
+    '''
     def __str__(self):
-        return self.agent_name
-
+        return self.agent_name + ' (' + str(self.office) + ')'
 
 
 
