@@ -29,7 +29,7 @@ def quick_property_search(request):
     else:
         form = QuickPropertySearchForm()
 
-    return render(request, 'properties/quick-property-search.html', {'search_results':'', 'message':'', 'form':form})
+    return render(request, 'properties/quick-property-search.html', {'search_results':[], 'message':'', 'form':form})
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
@@ -63,3 +63,7 @@ def advanced_property_search(request):
         form = AdvancedPropertySearchForm()
 
     return render(request, 'properties/advanced-property-search.html', {'form':form})
+ 
+
+
+
