@@ -165,7 +165,7 @@ class QuickPropertySearchTests(TestCase):
 class LocationViewTests(TestCase):
     # Test 200 returned for office locations page
     def test_200_response_locations_page(self):
-        response = self.client.get('properties:locations')
+        response = self.client.get(reverse('properties:locations'))
         self.assertEqual(response.status_code, 200)
 
     # Test 0 offices displays a message
@@ -176,11 +176,12 @@ class LocationViewTests(TestCase):
 class AgentsViewTests(TestCase):
     # Test 200 response status for agent page
     def test_200_response_status_agents_page(self):
-        response = self.client.get('properties:agents')
+        response = self.client.get(reverse('properties:agents'))
         self.assertEqual(response.status_code, 200)
 
     # Test 0 agents displays a message
     def test_0_agents_returns_generic_email_contact_address(self):
-        response = self.client.get(reverse('properties:locations'))
+        response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
 
