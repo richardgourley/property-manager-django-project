@@ -123,7 +123,6 @@ class IndexTests(TestCase):
         response = self.client.get(reverse('properties:index'))
         self.assertQuerysetEqual(response.context['properties'], [])
 
-
 class PropertyDetailViewTests(TestCase):
     # Test response status is 200 for property with pub_date in past
     def test_200_returned_if_pub_date_is_now_or_past(self):
@@ -153,6 +152,11 @@ class PropertyDetailViewTests(TestCase):
         self.assertIn("info@mail.com", str(response.content))
 
 class QuickPropertySearchTests(TestCase):
+    # Test 200 returned for quick search
+    def test_200_quick_search_page(self):
+        response = self.client.get(reverse('properties:quick_property_search'))
+        self.assertEqual(response.status_code, 200)
+
     # Test that 0 properties returns a message in page
     def test_0_properties_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:quick_property_search'))
@@ -169,5 +173,7 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:locations'))
         self.assertIn("info@mail.com", str(response.content))
+
+
 
 
