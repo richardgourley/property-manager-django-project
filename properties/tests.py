@@ -163,6 +163,11 @@ class QuickPropertySearchTests(TestCase):
         self.assertIn("coming soon", str(response.content))
 
 class LocationViewTests(TestCase):
+    # Test 200 returned for office locations page
+    def test_200_response_locations_page(self):
+        response.self.client.get('properties:locations')
+        self.assertEqual(response.status_code, 200)
+
     # Test 0 offices displays a message
     def test_0_offices_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:locations'))
