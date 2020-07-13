@@ -123,6 +123,18 @@ class IndexTests(TestCase):
         response = self.client.get(reverse('properties:index'))
         self.assertQuerysetEqual(response.context['properties'], [])
 
+    # Test newest property appears first
+    def test_newest_property_appears_first_home_page(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Timezone now",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        property2 = create_property(
+            "Timezone now - 20 days",3,2,"Best flat in the city", timezone.now() - datetime.timedelta(days=20), 5, "Main Street", city1, 800
+        )
+        response = self.client.get(reverse('properties:index'))
+        self.assertEqual(response.context['properties'][0].property_name, "Timezone now")
+
 class PropertyDetailViewTests(TestCase):
     # Test response status is 200 for property with pub_date in past
     def test_200_returned_if_pub_date_is_now_or_past(self):
@@ -171,6 +183,7 @@ class LocationViewTests(TestCase):
     # Test 0 offices displays a message
     def test_0_offices_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:locations'))
+        print(type(response.content))
         self.assertIn("coming soon", str(response.content))
 
 class AgentsViewTests(TestCase):
