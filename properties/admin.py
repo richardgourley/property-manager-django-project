@@ -11,7 +11,7 @@ class AgentInLine(admin.TabularInline):
 	verbose_name_plural = "AGENTS  - ASSIGN AN AGENT/ AGENTS TO THIS PROPERTY"
 
 class PropertyAdmin(admin.ModelAdmin):
-	list_display = ['property_name', 'bedrooms', 'bathrooms', 'city', 'display_agent', 'price']
+	list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'display_agent', 'price']
 	
 	inlines = [
         AgentInLine,
@@ -24,6 +24,7 @@ admin.site.register(Property, PropertyAdmin)
 admin.site.register(Agent, AgentAdmin)
 admin.site.register(Office)
 admin.site.register(City)
+
 
 
 
