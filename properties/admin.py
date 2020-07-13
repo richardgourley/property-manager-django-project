@@ -11,9 +11,13 @@ class PropertyAdmin(admin.ModelAdmin):
         AgentInLine,
 	]
 
+class AgentAdmin(admin.ModelAdmin):
+	list_display = ['agent_name', 'email', 'office']
+
 admin.site.register(Property, PropertyAdmin)
-admin.site.register(Agent)
+admin.site.register(Agent, AgentAdmin)
 admin.site.register(Office)
 admin.site.register(City)
+
 
 
