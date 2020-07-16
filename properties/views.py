@@ -10,7 +10,7 @@ def index(request):
     cities = City.objects.all()
     form = QuickPropertySearchForm()
     if(len(properties) == 0):
-        return render(request, 'properties/index.html', {'form':form})
+        return render(request, 'properties/index.html', {'message':message, 'form':form})
     return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
 class PropertyDetailView(generic.DetailView):
@@ -65,10 +65,6 @@ def advanced_property_search(request):
         form = AdvancedPropertySearchForm()
 
     return render(request, 'properties/advanced-property-search.html', {'form':form})
- 
-
-
-
  
 
 
