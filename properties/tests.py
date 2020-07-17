@@ -105,6 +105,9 @@ class IndexTests(TestCase):
 
     # Test if 0 cities then we display a 'welcome message' instead of quick search
     def test_if_0_cities_displays_welcome_message_not_quick_search(self):
+        property1 = create_property(
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+        )
         response = self.client.get(reverse('properties:index'))
         contains = 'Welcome to Property Rentals' in str(response.content)
         self.assertIs(contains, True)
@@ -133,7 +136,7 @@ class IndexTests(TestCase):
             "Timezone now - 20 days",3,2,"Best flat in the city", timezone.now() - datetime.timedelta(days=20), 5, "Main Street", city1, 800
         )
         response = self.client.get(reverse('properties:index'))
-        self.assertEqual(response.context['properties'][0].property_name, "Timezone now")
+        self.assertEqual(response.context['properties'][0].property_name, "Flat timezone.now()")
 
 class PropertyDetailViewTests(TestCase):
     # Test response status is 200 for property with pub_date in past
@@ -173,6 +176,11 @@ class QuickPropertySearchTests(TestCase):
     def test_0_properties_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:quick_property_search'))
         self.assertIn("coming soon", str(response.content))
+
+    # Test context returns an empty query set if 0 properties
+    def test_0_properties_returns_empty(self):
+        response = self.client.get(reverse('properties:quick_property_search'))
+        self.assertEqual(response.context['search_results'], [])
 
 class LocationViewTests(TestCase):
     # Test 200 returned for office locations page
