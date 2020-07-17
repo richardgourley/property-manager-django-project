@@ -8,9 +8,12 @@ from django.db.models import Q
 def index(request):
     properties = Property.objects.all().order_by('-pub_date')[:5]
     cities = City.objects.all()
+    # If there are 0 cities then dont create the form and display messages according to tests.py
+    if len(cities) == 0 and properties == 0:
+        return render(request, 'properties/index.html', {'city_message':city_message})
+
+
     form = QuickPropertySearchForm()
-    if(len(properties) == 0):
-        return render(request, 'properties/index.html', {'form':form})
     return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
 class PropertyDetailView(generic.DetailView):
