@@ -9,8 +9,15 @@ def index(request):
     properties = Property.objects.all().order_by('-pub_date')[:5]
     cities = City.objects.all()
     # If there are 0 cities then dont create the form and display messages according to tests.py
-    if len(cities) == 0 and properties == 0:
-        return render(request, 'properties/index.html', {'city_message':city_message})
+    if len(properties == 0 and len(cities) > 0):
+        property_message = 'Coming soon! We are going to be adding new properties daily. Check back soon!'
+        form = QuickPropertySearchForm()
+        return render(request, 'properties/index.html', 'property_message':property_message, 'form':form, 'cities':cities)
+
+    if len(cities) == 0 and len(properties) == 0:
+        city_message = 'Welcome to property rentals! We are working on a new property search feature.'
+        property_message = 'Coming soon! We are going to be adding new properties daily. Check back soon!'
+        return render(request, 'properties/index.html', {'city_message':city_message, 'property_message':property_message})
 
 
     form = QuickPropertySearchForm()
@@ -68,6 +75,10 @@ def advanced_property_search(request):
         form = AdvancedPropertySearchForm()
 
     return render(request, 'properties/advanced-property-search.html', {'form':form})
+ 
+
+
+
  
 
 
