@@ -105,6 +105,7 @@ class IndexTests(TestCase):
 
     # Test if 0 cities then we display a 'welcome message' instead of quick search
     def test_if_0_cities_displays_welcome_message_not_quick_search(self):
+        city1 = create_city("Berlin")
         property1 = create_property(
             "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
         )
@@ -204,5 +205,9 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
+
+
+
 
 
