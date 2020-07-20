@@ -11,9 +11,7 @@ def index(request):
     
     # If 0 properties in db - dont display search form AND return 'coming soon' and 'welcome' messages
     if len(properties) == 0:
-        city_message = 'Welcome to property rentals! We are working on a new property search feature.'
-        property_message = 'Coming soon! We are going to be adding new properties daily. Check back soon!'
-        return render(request, 'properties/index.html', {'city_message':city_message, 'property_message':property_message})
+        return render(request, 'properties/index-coming-soon.html', {})
 
     # Even if 0 cities in db, we can still display properties but DONT display city search form
     if len(cities) == 0 and len(properties) > 0:
