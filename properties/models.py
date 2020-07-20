@@ -28,7 +28,7 @@ class Property(models.Model):
     pub_date = models.DateTimeField('date published')
     street_number = models.PositiveSmallIntegerField(default=0)
     street_address = models.CharField(max_length=150)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=False)
     price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
 
     def __str__(self):
