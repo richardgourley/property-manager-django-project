@@ -9,16 +9,11 @@ def index(request):
     properties = Property.objects.all().order_by('-pub_date')[:5]
     cities = City.objects.all()
     
-    # If 0 properties in db - dont display search form AND return 'coming soon' and 'welcome' messages
+    # If 0 properties in db - display index-coming-soon-page
     if len(properties) == 0:
         return render(request, 'properties/index-coming-soon.html', {})
-
-    # Even if 0 cities in db, we can still display properties but DONT display city search form
-    if len(cities) == 0 and len(properties) > 0:
-        city_message = 'Welcome to property rentals! We are working on a new property search feature.'
-        return render(request, 'properties/index.html', {'city_message':city_message, 'properties':properties})
     
-    # In case of both properties and cities display both and the quick search form
+    # If properties exist in db - display normal index page
     form = QuickPropertySearchForm()
     return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
