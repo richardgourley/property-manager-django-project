@@ -8,6 +8,7 @@
     </div>
 </div>
 
+{% if offices %}
 <div class="container pt-5">
     <div class="row">
     {% for o in offices %}
@@ -23,6 +24,16 @@
     {% endfor %}
     </div>
 </div>
+{% else %}
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Coming soon!</h2>
+                <p>We are currently moving offices! Check back soon for our new office address!</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 <div class="container pt-5 pb-5 text-center">
     <h1 class="text-muted">Ready to meet the team?</h1>
