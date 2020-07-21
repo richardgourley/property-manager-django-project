@@ -8,12 +8,14 @@ from django.db.models import Q
 def index(request):
     properties = Property.objects.all().order_by('-pub_date')[:5]
     cities = City.objects.all()
+    coming_soon = False
     
-    # If 0 properties in db - display index-coming-soon-page
+    # If 0 properties in db - return 'coming_soon' which displays index-coming-soon-page
     if len(properties) == 0:
-        return render(request, 'properties/index-coming-soon.html', {})
+        coming_soon = True
+        return render(request, 'properties/index.html', {'coming_soon':coming_soon})
     
-    # If properties exist in db - display normal index page
+    # If properties exist in db - return properties and cities - display normal index page
     form = QuickPropertySearchForm()
     return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
