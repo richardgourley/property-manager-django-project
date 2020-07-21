@@ -133,7 +133,7 @@ class IndexTests(TestCase):
             "Timezone now - 20 days",3,2,"Best flat in the city", timezone.now() - datetime.timedelta(days=20), 5, "Main Street", city1, 800
         )
         response = self.client.get(reverse('properties:index'))
-        self.assertEqual(response.context['properties'][0].property_name, "Flat timezone.now()")
+        self.assertEqual(response.context['properties'][0].property_name, "Timezone now")
 
 class PropertyDetailViewTests(TestCase):
     # Test response status is 200 for property with pub_date in past
@@ -201,4 +201,5 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
 
