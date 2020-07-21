@@ -2,11 +2,15 @@
 
 {% block content %}
 
+{% if coming_soon %}
+{% include 'properties/index-coming-soon.html' %}
+
+{% else %}
 <div class="container-fluid text-white bg-primary shadow">
     <div class="container text-center justify-content-center pt-5 pb-5">
         <h1>Quick search!</h1>
         <p>Choose a town or city to start your search!</p>
-        <form action="{% url 'properties:quick_property_search' %}" method="post">
+        <form class="" action="{% url 'properties:quick_property_search' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input class="text-center btn btn-success border-white" type="submit" value="Search properties!">
@@ -26,7 +30,7 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="card-body">
                         <h3 class="card-title">
-                        <a href="{% url 'properties:property_display' p.id %}" >{{ p.property_name }}</a>
+                        <a href="{% url 'properties:property_detail' p.id %}" >{{ p.property_name }}</a>
                         </h3>
                         <p class="card-text"><strong>CITY/ TOWN: {{ p.city }}</strong></p>
                         <p class="card-text">{{ p.description}}</p>
@@ -46,7 +50,7 @@
                         {% endfor %}
                         <hr>
                         <h5 class="card-text">PRICE: ${{ p.price }} pcm</h5>
-                        <a href="{% url 'properties:property_display' p.id %}">
+                        <a href="{% url 'properties:property_detail' p.id %}">
                             <button class="btn btn-success border-white">See more!</button>
                         </a>
                     </div>
@@ -64,9 +68,8 @@
     <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
 </div>
 
+{% endif %}
 {% endblock %}
-
-
 
 
 
