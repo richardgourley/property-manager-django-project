@@ -184,7 +184,7 @@ class QuickPropertySearchTests(TestCase):
     # Test context returns an empty query set if 0 properties
     def test_0_properties_returns_empty(self):
         response = self.client.get(reverse('properties:quick_property_search'))
-        self.assertEqual(response.context['search_results'], [])
+        self.assertEqual(response.context['properties'], [])
 
 class LocationViewTests(TestCase):
     # Test 200 returned for office locations page
