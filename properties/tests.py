@@ -179,12 +179,11 @@ class QuickPropertySearchTests(TestCase):
     # Test that 0 properties returns a message in page
     def test_0_properties_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:quick_property_search'))
-        self.assertIn("coming soon", str(response.content))
+        self.assertIn("Coming soon", str(response.content))
 
-    # Test context returns an empty query set if 0 properties
-    def test_0_properties_returns_empty(self):
+    def test_0_properties_returns_coming_soon_in_context(self):
         response = self.client.get(reverse('properties:quick_property_search'))
-        self.assertEqual(response.context['properties'], [])
+        self.assertEqual(response.context['coming_soon'], True)
 
 class LocationViewTests(TestCase):
     # Test 200 returned for office locations page
@@ -208,9 +207,4 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
-
-
-
-
-
 
