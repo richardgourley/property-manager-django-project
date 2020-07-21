@@ -11,12 +11,15 @@ def index(request):
     cities = City.objects.all()
     coming_soon = False
     
-    # If 0 properties in db - return 'coming_soon' which displays index-coming-soon-page
+    '''
+    If there are 0 properties in db - return coming soon - which returns coming soon page
+    '''
     if len(properties) == 0:
         coming_soon = True
         return render(request, 'properties/index.html', {'coming_soon':coming_soon})
-    
-    # If properties exist in db - return properties and cities - display normal index page
+    '''
+    If properties exist, process post request or display form
+    '''
     form = QuickPropertySearchForm()
     return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
 
@@ -28,12 +31,22 @@ class PropertyDetailView(generic.DetailView):
         return Property.objects.all()
 
 def quick_property_search(request):
+    '''
+    If there are 0 properties in db - return coming soon - which returns coming soon page
+    '''
+    properties = Property.objects.all()
+    if len(properties) == 0:
+        coming_soon = True
+        return render(request, 'properties/index.html', {'coming_soon':True})
+    '''
+    If properties exist, process post request or display form
+    '''
     if request.method == 'POST':
         form = QuickPropertySearchForm(request.POST)
         if form.is_valid():
             city_name = form.cleaned_data['city']
-            properties = Property.objects.filter(city=city_name)
-            message = "We found 1 matching result" if len(search_results) == 1 else "We found {} matching results.".format(len(search_results))
+            properties = properties.filter(city=city_name)
+            message = "We found 1 matching result" if len(properties) == 1 else "We found {} matching results.".format(len(properties))
             return render(request, 'properties/quick-property-search.html', {'properties':properties, 'message':message, 'form':form})
     else:
         form = QuickPropertySearchForm()
