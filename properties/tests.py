@@ -104,19 +104,15 @@ class IndexTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     # Test if 0 cities then we display a 'welcome message' instead of quick search
-    def test_if_0_cities_displays_welcome_message_not_quick_search(self):
-        city1 = create_city("Berlin")
-        property1 = create_property(
-            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
-        )
+    def test_if_0_properties_displays_welcome_message_not_quick_search(self):
         response = self.client.get(reverse('properties:index'))
-        contains = 'Welcome to Property Rentals' in str(response.content)
+        contains = 'Welcome' in str(response.content)
         self.assertIs(contains, True)
 
     # Need to test that 0 properties returns a message
     def test_0_properties_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:index'))
-        self.assertIn("coming soon", str(response.content))
+        self.assertIn("Coming soon", str(response.content))
 
     # Test if properties with pub_date in the future don't appear
     def test_properties_pub_date_future_dont_appear(self):
@@ -205,9 +201,4 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
-
-
-
-
-
 
