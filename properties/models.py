@@ -34,11 +34,6 @@ class Property(models.Model):
     def __str__(self):
         return self.property_name
 
-    # Returns agent/s as a string for this property - used in admin.py to display agent/s next to property.
-    def display_agent(self):
-        agents = self.agent_set.all()
-        return (', ').join(str(agent) for agent in agents)
-
 class Agent(models.Model):
     agent_name = models.CharField(max_length=150)
     email = models.EmailField()
