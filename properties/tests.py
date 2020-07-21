@@ -165,7 +165,7 @@ class PropertyDetailViewTests(TestCase):
     def test_generic_email_given_if_no_agent_assigned(self):
         city1 = create_city("Berlin")
         property1 = create_property(
-            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+            "Lovely new flat",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
         )
         response = self.client.get(reverse('properties:property_detail', args=(property1.id,)))
         self.assertIn("info@mail.com", str(response.content))
@@ -194,8 +194,7 @@ class LocationViewTests(TestCase):
     # Test 0 offices displays a message
     def test_0_offices_returns_coming_soon_message(self):
         response = self.client.get(reverse('properties:locations'))
-        print(type(response.content))
-        self.assertIn("coming soon", str(response.content))
+        self.assertIn("Coming soon", str(response.content))
 
 class AgentsViewTests(TestCase):
     # Test 200 response status for agent page
@@ -207,4 +206,9 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
+
+
+
+
 
