@@ -8,6 +8,7 @@
     </div>
 </div>
 
+{% if agents %}
 <div class="container pt-5">
     <div class="row">
     {% for a in agents %}
@@ -24,6 +25,16 @@
     {% endfor %}
     </div>
 </div>
+{% else %}
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>We are currently updating our agents' profiles!</h3>
+            <p>For any enquiries please contact us at <strong>info@mail.com</strong></p>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 <div class="container pt-5 pb-5 text-center">
     <h1 class="text-muted">Ready to start your search?</h1>
@@ -32,4 +43,3 @@
 </div>
 
 {% endblock %}
-
