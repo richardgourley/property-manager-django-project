@@ -32,13 +32,13 @@ def quick_property_search(request):
         form = QuickPropertySearchForm(request.POST)
         if form.is_valid():
             city_name = form.cleaned_data['city']
-            search_results = Property.objects.filter(city=city_name)
+            properties = Property.objects.filter(city=city_name)
             message = "We found 1 matching result" if len(search_results) == 1 else "We found {} matching results.".format(len(search_results))
-            return render(request, 'properties/quick-property-search.html', {'search_results':search_results, 'message':message, 'form':form})
+            return render(request, 'properties/quick-property-search.html', {'properties':properties, 'message':message, 'form':form})
     else:
         form = QuickPropertySearchForm()
 
-    return render(request, 'properties/quick-property-search.html', {'search_results':[], 'message':'', 'form':form})
+    return render(request, 'properties/quick-property-search.html', {'properties':[], 'message':'', 'form':form})
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
