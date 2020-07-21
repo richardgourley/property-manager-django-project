@@ -117,11 +117,18 @@ class IndexTests(TestCase):
     # Test if properties with pub_date in the future don't appear
     def test_properties_pub_date_future_dont_appear(self):
         city1 = create_city("Berlin")
+        '''
+        property1 has future date, property2 has current date
+        We expect property1 NOT to show so we expect len(properties) to be 1
+        '''
         property1 = create_property(
-            "Lovely new flat",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+            "property1",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
+        )
+        property2 = create_property(
+            "property2",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
         )
         response = self.client.get(reverse('properties:index'))
-        self.assertQuerysetEqual(response.context['properties'], [])
+        self.assertQuerysetEqual(response.context['properties'], ['<property2>'])
 
     # Test newest property appears first
     def test_newest_property_appears_first_home_page(self):
@@ -201,5 +208,9 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
+
+
+
 
 
