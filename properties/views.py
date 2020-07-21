@@ -3,10 +3,11 @@ from django.views import generic
 from .models import Property, City,Office, Agent
 from .forms import QuickPropertySearchForm, AdvancedPropertySearchForm
 from django.db.models import Q
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
-    properties = Property.objects.all().order_by('-pub_date')[:5]
+    properties = Property.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     cities = City.objects.all()
     coming_soon = False
     
