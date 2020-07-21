@@ -28,7 +28,7 @@ class PropertyDetailView(generic.DetailView):
     template_name = 'properties/property-detail.html'
 
     def get_queryset(self):
-        return Property.objects.all()
+        return Property.objects.filter(pub_date__lte=timezone.now())
 
 def quick_property_search(request):
     '''
