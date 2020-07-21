@@ -119,7 +119,7 @@ class IndexTests(TestCase):
         city1 = create_city("Berlin")
         '''
         property1 has future date, property2 has current date
-        We expect property1 NOT to show so we expect len(properties) to be 1
+        We expect property1 NOT to show so we expect ['<Property: property2>']
         '''
         property1 = create_property(
             "property1",3,2,"Best flat in the city", timezone.now() + datetime.timedelta(days=30), 5, "Main Street", city1, 800
@@ -128,7 +128,7 @@ class IndexTests(TestCase):
             "property2",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
         )
         response = self.client.get(reverse('properties:index'))
-        self.assertQuerysetEqual(response.context['properties'], ['<property2>'])
+        self.assertQuerysetEqual(response.context['properties'], ['<Property: property2>'])
 
     # Test newest property appears first
     def test_newest_property_appears_first_home_page(self):
