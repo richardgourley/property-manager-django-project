@@ -30,9 +30,9 @@
 	</div>
 {% endif %}
 
-{% if search_results %}
+{% if properties %}
     <div class="container pt-4">
-    {% for p in search_results %}
+    {% for property in properties %}
 	    <div class="card mb-3 shadow-sm">
             <div class="row no-gutters">
                 <div class="col-md-4 col-lg-2 bg-light" style="width:100%; height:200px">
@@ -41,27 +41,32 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="card-body">
                         <h3 class="card-title">
-                        <a href="{% url 'properties:property_detail' p.id %}" >{{ p.property_name }}</a>
+                        <a href="{% url 'properties:property_detail' property.id %}" >{{ property.property_name }}</a>
                         </h3>
-                        <p class="card-text"><strong>CITY/ TOWN: {{ p.city }}</strong></p>
-                        <p class="card-text">{{ p.description}}</p>
+                        <p class="card-text"><strong>CITY/ TOWN: {{ property.city }}</strong></p>
+                        <p class="card-text">{{ property.description}}</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Bedrooms: {{ p.bedrooms }}</li>
-                            <li class="list-group-item">Bathrooms: {{ p.bathrooms }}</li>
+                            <li class="list-group-item">Bedrooms: {{ property.bedrooms }}</li>
+                            <li class="list-group-item">Bathrooms: {{ property.bathrooms }}</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-4 bg-light">
                     <div class="card-body">
                         <h4 class="card-title text-muted">CONTACT</h4>
-                        {% for agent in p.agent_set.all %}
-                        <p class="card-title">NAME: {{ agent.agent_name }}</p>
-                        <p class="card-text">EMAIL: {{ agent.email }}</p>
-                        <p class="card-text">OFFICE: {{ agent.office}}</p>
-                        {% endfor %}
+                        {% if property.agent_set.all %}
+                            {% for agent in property.agent_set.all %}
+                            <p class="card-title">NAME: {{ agent.agent_name }}</p>
+                            <p class="card-text">EMAIL: {{ agent.email }}</p>
+                            <p class="card-text">OFFICE: {{ agent.office}}</p>
+                            <hr>
+                            {% endfor %}
+                        {% else %}
+                            <p class="card-text">EMAIL: info@mail.com</p>
+                        {% endif %}
                         <hr>
-                        <h5 class="card-text">PRICE: ${{ p.price }} pcm</h5>
-                        <a href="{% url 'properties:property_detail' p.id %}">
+                        <h5 class="card-text">PRICE: ${{ property.price }} pcm</h5>
+                        <a href="{% url 'properties:property_detail' property.id %}">
                             <button class="btn btn-success border-white">See more!</button>
                         </a>
                     </div>
