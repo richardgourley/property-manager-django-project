@@ -18,6 +18,7 @@ This is a property manager system for a website.  It incorporates many models re
 - Testing ON_DELETE has desired effect on ForeignKey fields.
 
 ## SKILLS COVERED
+- Generic classes for views - ListView, DisplayView
 - Admin list_display used to display bespoke information next to object names in admin.
 - Many to many relationships
 - Reverse many to many queries using object.object_set.all()
