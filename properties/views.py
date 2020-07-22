@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Property, City,Office, Agent
+from .models import Property, City, Office, Agent
 from .forms import QuickPropertySearchForm, AdvancedPropertySearchForm
 from django.db.models import Q
 from django.utils import timezone
@@ -10,7 +10,6 @@ def index(request):
     properties = Property.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     cities = City.objects.all()
     coming_soon = False
-    
     '''
     If there are 0 properties in db - return coming soon - which returns coming soon page
     '''
@@ -34,7 +33,7 @@ def quick_property_search(request):
     '''
     If there are 0 properties in db - return coming soon - which returns coming soon page
     '''
-    properties = Property.objects.all()
+    properties = Property.objects.filter(pub_date__lte=timezone.now())
     if len(properties) == 0:
         coming_soon = True
         return render(request, 'properties/index.html', {'coming_soon':True})
