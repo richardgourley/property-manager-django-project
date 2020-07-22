@@ -24,7 +24,8 @@ This is a property manager system for a website.  It incorporates many models re
 - Foreign keys
 - Verbose plural names added to models to fix admin display issue - 'Citys', 'Propertys' etc.
 - FORMS - dynamically created fields using ModelChoiceField
-- Defining __str__ for all model names to give human readable names in admin.
+- Defining __str__ creating human readable names in admin.
+- Bespoke functions and display in admin using .short_description
 - Template tags - |length_is and |linebreaks
 - Q - querying on mulitple fields
 
