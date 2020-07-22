@@ -4,11 +4,11 @@ This is a property manager system for a website.  It incorporates many models re
 ## MODELS
 
 
-## WHO IS IT FOR?
-
 ## SITE ADMIN
-- list_display used in PropertyAdmin to display all agents next to a property.
-- Inlines used to allow adding and editing other models within property model admin page.
+- Property - add property details and assign agents to a property
+- Office - add, modify office details 
+- Agents - agents details added, assigned to an office
+- City - can be added and modified - each property has a city
 
 ## SITE PAGES
 
