@@ -142,6 +142,15 @@ class IndexTests(TestCase):
         response = self.client.get(reverse('properties:index'))
         self.assertEqual(response.context['properties'][0].property_name, "Timezone now")
 
+    def test_generic_email_given_if_no_agent_assigned_to_property(self):
+        city1 = create_city("Berlin")
+        property1 = create_property(
+            "Timezone now",3,2,"Best flat in the city", timezone.now(), 5, "Main Street", city1, 800
+        )
+        response = self.client.get(reverse('properties:index'))
+        self.assertIn("info@mail.com", str(response.content))
+
+
 class PropertyDetailViewTests(TestCase):
     # Test response status is 200 for property with pub_date in past
     def test_200_returned_if_pub_date_is_now_or_past(self):
@@ -206,6 +215,17 @@ class AgentsViewTests(TestCase):
     def test_0_agents_returns_generic_email_contact_address(self):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
+
+class AdvancedSearchTests(TestCase):
+    # Test 200 response status for agent page
+    def test_200_response_status_advanced_search(self):
+        response = self.client.get(reverse('properties:advanced_property_search'))
+        self.assertEqual(response.status_code, 200)
+
+    # Test that 0 properties returns a message in page
+    def test_0_properties_returns_coming_soon_message(self):
+        response = self.client.get(reverse('properties:advanced_property_search'))
+        self.assertIn("Coming soon", str(response.content))
 
 
 
