@@ -43,7 +43,7 @@ class Property(models.Model):
 class Agent(models.Model):
     agent_name = models.CharField(max_length=150)
     email = models.EmailField()
-    property = models.ManyToManyField(Property)
+    property = models.ManyToManyField(Property, help_text="Add an agent to a property")
     # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
     office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
 
