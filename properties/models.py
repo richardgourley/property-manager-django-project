@@ -34,6 +34,12 @@ class Property(models.Model):
     def __str__(self):
         return self.property_name
 
+    def display_agents(self):
+        agents = self.agent_set.all()
+        return (', ').join(str(agent) for agent in agents)
+
+    display_agents.short_description = "AGENT/S"
+
 class Agent(models.Model):
     agent_name = models.CharField(max_length=150)
     email = models.EmailField()
