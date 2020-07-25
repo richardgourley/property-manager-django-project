@@ -12,6 +12,7 @@ class AgentInLine(admin.TabularInline):
 
 class PropertyAdmin(admin.ModelAdmin):
     list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'get_agents', 'price']
+    list_filter = ['pub_date', 'city']
     
     def get_agents(self, obj):
         agents = obj.agent_set.all()
