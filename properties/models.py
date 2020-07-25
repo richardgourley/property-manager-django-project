@@ -1,57 +1,41 @@
-from django.db import models
+from django.contrib import admin
+from .models import Property, Agent, Office, City
 
-# Create your models here.
-class Office(models.Model):
-    office_name = models.CharField(max_length=150)
-    address = models.TextField(blank=False)
-
-    def __str__(self):
-        return self.office_name
-
-class City(models.Model):
-    class Meta:
-        verbose_name = 'city'
-        verbose_name_plural = 'cities'
-    city_name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.city_name
-
-class Property(models.Model):
-    class Meta:
-        verbose_name = 'property'
-        verbose_name_plural = 'properties'
-    property_name = models.CharField(max_length=150)
-    bedrooms = models.PositiveSmallIntegerField(default=0)
-    bathrooms = models.PositiveSmallIntegerField(default=0)
-    description = models.TextField(blank=False)
-    pub_date = models.DateTimeField('date published')
-    street_number = models.PositiveSmallIntegerField(default=0)
-    street_address = models.CharField(max_length=150)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=False)
-    price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
-
-    def __str__(self):
-        return self.property_name
-
-    def display_agents(self):
-        agents = self.agent_set.all()
-        return (', ').join(str(agent) for agent in agents)
-
-    display_agents.short_description = "AGENT/S"
-
-class Agent(models.Model):
-    agent_name = models.CharField(max_length=150)
-    email = models.EmailField()
-    property = models.ManyToManyField(Property, help_text="Add an agent to a property")
-    # Set null=True because some agents might be freelance AND if we delete the office, the agent is still employed
-    office = models.ForeignKey(Office, on_delete=models.SET_NULL, null=True)
-
+# Register your models here.
+class AgentInLine(admin.TabularInline):
+    model = Agent.property.through
     '''
-    Return the office name next to the agent - helps in defining agents in admin page
+    Override verbose name and verbose plural name only for the admin form to offer more instruction
     '''
-    def __str__(self):
-        return self.agent_name + ' (' + str(self.office) + ')'
+    verbose_name = "AGENT"
+    verbose_name_plural = "AGENTS  - ASSIGN AN AGENT/ AGENTS TO THIS PROPERTY"
 
+@admin.register(Property)
+class PropertyAdmin(admin.ModelAdmin):
+    list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'display_agents', 'price']
+    list_filter = ['pub_date', 'city']
+    
+    inlines = [
+        AgentInLine,
+    ]
 
+    fieldsets = (
+        ('General Information', {
+            'fields': ('property_name','city')
+        }),
+        ('Details', {
+            'fields': ('bedrooms','bathrooms')
+        }),
+        ('Date Published and Price', {
+            'fields': ('pub_date', 'price')
+        }),
+    )
 
+@admin.register(Agent)
+class AgentAdmin(admin.ModelAdmin):
+    list_display = ['agent_name', 'email', 'office']
+
+#admin.site.register(Property, PropertyAdmin)
+#admin.site.register(Agent, AgentAdmin)
+admin.site.register(Office)
+admin.site.register(City)
