@@ -10,24 +10,32 @@ class AgentInLine(admin.TabularInline):
     verbose_name = "AGENT"
     verbose_name_plural = "AGENTS  - ASSIGN AN AGENT/ AGENTS TO THIS PROPERTY"
 
+@admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'get_agents', 'price']
+    list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'display_agents', 'price']
     list_filter = ['pub_date', 'city']
     
-    def get_agents(self, obj):
-        agents = obj.agent_set.all()
-        return (', ').join(str(agent) for agent in agents)
-
-    get_agents.short_description = "AGENT/S"
-
     inlines = [
         AgentInLine,
     ]
 
+    fieldsets = (
+        ('General Information', {
+            'fields': ('property_name','city','street_number','street_address')
+        }),
+        ('Details', {
+            'fields': ('bedrooms','bathrooms')
+        }),
+        ('Date Published and Price', {
+            'fields': ('pub_date', 'price')
+        }),
+    )
+
+@admin.register(Agent)
 class AgentAdmin(admin.ModelAdmin):
     list_display = ['agent_name', 'email', 'office']
 
-admin.site.register(Property, PropertyAdmin)
-admin.site.register(Agent, AgentAdmin)
+#admin.site.register(Property, PropertyAdmin)
+#admin.site.register(Agent, AgentAdmin)
 admin.site.register(Office)
 admin.site.register(City)
