@@ -30,6 +30,7 @@ advanced search -
 ## SKILLS REFERENCE
 VIEWS
 - Generic classes for views - ListView, DisplayView
+
 MODELS
 - Many to many relationships
 - Foreign keys
@@ -37,13 +38,16 @@ MODELS
 - Defining __str__ creating human readable names for admin.
 - Help text on fields
 - Bespoke functions and display in admin using .short_description
+
 ADMIN
 - list_display to configure display of items in list view of each object
 - list filter - allows filtering of large numbers of objects
 - fieldsets - put fields into groups
 - inlines - display foreign key and many to many fields 
+
 FORMS
 - FORMS - dynamically created fields using ModelChoiceField
+
 QUERIES
 - Reverse many to many queries using object.object_set.all()
 - Q - querying on mulitple fields
