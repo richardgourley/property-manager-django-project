@@ -26,7 +26,7 @@ class Property(models.Model):
     bathrooms = models.PositiveSmallIntegerField(default=0)
     description = models.TextField(blank=False)
     pub_date = models.DateTimeField('date published', help_text="Either click 'Today' and 'Now' or you can enter a date in the past.")
-    street_number = models.PositiveSmallIntegerField(default=0)
+    street_number = models.PositiveSmallIntegerField(default=0, help_text="Leave default as 0 if you haven't been given an exact street number.")
     street_address = models.CharField(max_length=150)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=False)
     price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
