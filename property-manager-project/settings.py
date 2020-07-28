@@ -1,5 +1,9 @@
 # Only included the parts you would need to modify
 
+'''
+SEE DJANGOPROJECT.COM FOR CONFIGURING SETTINGS.PY AND THE OPTIONS AVAILABLE
+'''
+
 # Add the 'properties' app for our properties models - adding 'PropertiesConfig' from properties/apps
 INSTALLED_APPS = [
     'properties.apps.PropertiesConfig',
@@ -16,7 +20,7 @@ INSTALLED_APPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'property_manager-project',
+        'NAME': 'database_name',
         'USERNAME':'username',
         'PASSWORD':'password',
         'HOST':'127.0.0.1',
