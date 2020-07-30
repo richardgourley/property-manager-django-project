@@ -1,13 +1,15 @@
 # Property Manager - Django Project
 This is a multi-office, multi-agent property management system for a website.  It allows employees to log into the admin and add, edit and delete properties.  The system would work for a growing company as users can also add office locations, cities, and new agents who are assigned to look after each property.  It is set up so more than 1 agent can be the contact/s for a property.
+
 The models are linked together in a relational database.
+
 The site visitor can make use of a 'quick search' and an 'advanced property search', as well as viewing office locations and agent contact details to make an enquiry.
 
 ## MODELS AND FIELDS
-Property - city(foreign key), bedrooms, bathrooms, description, address details, price, published date.
-Agent - name, property(many to many) , email
-City - name
-Office - name (geographical name), address
+- Property - city(foreign key), bedrooms, bathrooms, description, address details, price, published date.
+- Agent - name, property(many to many) , email
+- City - name
+- Office - name (geographical name), address
 
 ## SITE ADMIN
 - Property - add property details and assign agents to a property
@@ -16,11 +18,11 @@ Office - name (geographical name), address
 - City - can be added and modified - each property has a city
 
 ## SITE PAGES
-index - 'quick search' form, 5 latest properties
-agents/ meet the team - shows basic contact information for each agent
-offices - displays addresses for each office
-quick search page - allows search by city
-advanced search - 
+- index - 'quick search' form, 5 latest properties
+- agents/ meet the team - shows basic contact information for each agent
+- offices - displays addresses for each office
+- quick search page - allows search by city
+- advanced search - allow specific choices
 
 ## TESTING
 - Handling 0 properties in the db - displays a coming soon template
