@@ -19,7 +19,7 @@ The user can also view office locations and agent contact details in order to co
 - City - can be added and modified - each property has a city
 
 ## SITE PAGES
-- index - 'quick search' form, 5 latest properties
+- index - 'quick search' form + 5 latest properties displayed
 - agents/ meet the team - shows basic contact information for each agent
 - offices - displays addresses for each office
 - quick search page - allows search by city
