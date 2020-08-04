@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, PropertyDetailView, quick_property_search, LocationsView, AgentsView, advanced_property_search, about_us
+from .views import index, PropertyDetailView, quick_property_search, LocationsView, AgentsView, advanced_property_search
 
 app_name = 'properties'
 urlpatterns = [
@@ -10,7 +10,4 @@ urlpatterns = [
     path('meetTheTeam', AgentsView.as_view(), name="agents"),
     path('advancedSearch', advanced_property_search, name="advanced_property_search"),
 ]
-
-
-
 
