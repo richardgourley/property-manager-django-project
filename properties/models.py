@@ -22,6 +22,7 @@ class Property(models.Model):
         verbose_name = 'property'
         verbose_name_plural = 'properties'
     property_name = models.CharField(max_length=150, help_text="Eg. A beautiful 2 bedroom house with a large garden.")
+    property_image = models.ImageField(upload_to="images", null=True)
     bedrooms = models.PositiveSmallIntegerField(default=0)
     bathrooms = models.PositiveSmallIntegerField(default=0)
     description = models.TextField(blank=False)
