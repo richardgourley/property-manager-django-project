@@ -21,7 +21,7 @@ class PropertyAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('General Information', {
-            'fields': ('property_name','city','street_number','street_address')
+            'fields': ('property_name','property_image','city','street_number','street_address')
         }),
         ('Details', {
             'fields': ('bedrooms','bathrooms')
