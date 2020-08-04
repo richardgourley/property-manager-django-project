@@ -7,19 +7,9 @@ from django.utils import timezone
 
 # Create your views here.
 def index(request):
-    properties = Property.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     cities = City.objects.all()
-    '''
-    If there are 0 properties in db - return coming soon - which returns coming soon page
-    '''
-    if len(properties) == 0:
-        coming_soon = True
-        return render(request, 'properties/index.html', {'coming_soon':coming_soon})
-    '''
-    If properties exist, process post request or display form
-    '''
     form = QuickPropertySearchForm()
-    return render(request, 'properties/index.html', {'properties':properties, 'cities':cities, 'form':form})
+    return render(request, 'properties/index.html', {'cities':cities, 'form':form})
 
 class PropertyDetailView(generic.DetailView):
     model = Property
@@ -29,27 +19,17 @@ class PropertyDetailView(generic.DetailView):
         return Property.objects.filter(pub_date__lte=timezone.now())
 
 def quick_property_search(request):
-    '''
-    If there are 0 properties in db - return coming soon - which returns coming soon page
-    '''
-    properties = Property.objects.filter(pub_date__lte=timezone.now())
-    if len(properties) == 0:
-        coming_soon = True
-        return render(request, 'properties/index.html', {'coming_soon':True})
-    '''
-    If properties exist, process post request or display form
-    '''
     if request.method == 'POST':
         form = QuickPropertySearchForm(request.POST)
         if form.is_valid():
             city_name = form.cleaned_data['city']
-            properties = properties.filter(city=city_name)
+            properties = Property.objects.filter(city=city_name).filter(pub_date__lte=timezone.now())
             message = "We found 1 matching result" if len(properties) == 1 else "We found {} matching results.".format(len(properties))
             return render(request, 'properties/quick-property-search.html', {'properties':properties, 'message':message, 'form':form})
     else:
         form = QuickPropertySearchForm()
 
-    return render(request, 'properties/quick-property-search.html', {'properties':[], 'message':'', 'form':form})
+    return render(request, 'properties/quick-property-search.html', {'form':form})
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
@@ -66,11 +46,6 @@ class AgentsView(generic.ListView):
         return Agent.objects.filter().order_by('office')
 
 def advanced_property_search(request):
-    properties = Property.objects.filter(pub_date__lte=timezone.now())
-    if len(properties) == 0:
-        coming_soon = True
-        return render(request, 'properties/index.html', {'coming_soon':True})
-
     if request.method == 'POST':
         form = AdvancedPropertySearchForm(request.POST)
         if form.is_valid():
@@ -81,7 +56,7 @@ def advanced_property_search(request):
                 Q(price__lte=max_price)
                 & Q(city__city_name=city_name)
                 & Q(bedrooms__gte=min_bedrooms)
-            )
+            ).filter(pub_date__lte=timezone.now())
             message = "We found 1 matching result" if len(properties) == 1 else "We found {} matching results.".format(len(properties))
             return render(request, 'properties/advanced-property-search.html', {'properties':properties, 'message':message, 'form':form})
     else:
