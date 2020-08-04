@@ -7,7 +7,7 @@ The site visitor has 2 search forms to use - a 'quick search' based on location 
 The user can also view office locations and agent contact details in order to contact the company.
 
 ## MODELS AND FIELDS
-- Property - city(foreign key), bedrooms, bathrooms, description, address details, price, published date.
+- Property - city(foreign key), image field, bedrooms, bathrooms, description, address details, price, published date.
 - Agent - name, property(many to many) , email
 - City - name
 - Office - name (geographical name), address
@@ -23,7 +23,7 @@ The user can also view office locations and agent contact details in order to co
 - agents/ meet the team - shows basic contact information for each agent
 - offices - displays addresses for each office
 - quick search page - allows search by city
-- advanced search - allow specific choices
+- advanced search - allow advanced search preferences
 
 ## TESTING
 - Handling 0 properties in the db - displays a coming soon template
@@ -33,6 +33,9 @@ The user can also view office locations and agent contact details in order to co
 ## SKILLS REFERENCE
 VIEWS
 - Generic classes for views - ListView, DisplayView
+
+MEDIA
+- Saving and displaying images - using Pillow
 
 MODELS
 - Many to many relationships
