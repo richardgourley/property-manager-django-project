@@ -34,6 +34,10 @@ The user can also view office locations and agent contact details in order to co
 VIEWS
 - Generic classes for views - ListView, DisplayView
 
+CUSTOM CONTENT PROCESSOR
+- Bespoke function 
+- Obtains 5 most recent properties - available for every page in the app
+
 MEDIA
 - Saving and displaying images - using Pillow
 
