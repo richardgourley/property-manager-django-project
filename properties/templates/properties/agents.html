@@ -2,44 +2,45 @@
 
 {% block content %}
 <div class="container-fluid text-white bg-primary shadow">
-    <div class="container text-center justify-content-center pt-5 pb-5">
-        <h1>Meet the team</h1>
-        <p>Our team of professionals are on hand to help you find your perfect property rental!</p>
-    </div>
+  <div class="container text-center justify-content-center pt-5 pb-5">
+    <h1>Meet the team</h1>
+    <p>
+      Our team of professionals are on hand to help you find your perfect property rental!
+    </p>
+  </div>
 </div>
 
 {% if agents %}
 <div class="container pt-5">
-    <div class="row">
+  <div class="row">
     {% for a in agents %}
-        <div class="col-sm-6">
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <h2 class="card-title">{{ a.agent_name }}</h2>
-                    <p class="card-text">{{ a.email }}</p>
-                    <p class="card-text">OFFICE: {{ a.office }}</p>
-                </div>
-            </div>
+      <div class="col-sm-6">
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title">{{ a.agent_name }}</h2>
+            <p class="card-text">{{ a.email }}</p>
+            <p class="card-text">OFFICE: {{ a.office }}</p>
+          </div>
         </div>
-    
+      </div>
     {% endfor %}
-    </div>
+  </div>
 </div>
 {% else %}
 <div class="container pt-5">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h3>We are currently updating our agents' profiles!</h3>
-            <p>For any enquiries please contact us at <strong>info@mail.com</strong></p>
-        </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h3>We are currently updating our agents' profiles!</h3>
+      <p>For any enquiries please contact us at <strong>info@mail.com</strong></p>
     </div>
+  </div>
 </div>
 {% endif %}
 
 <div class="container pt-5 pb-5 text-center">
-    <h1 class="text-muted">Ready to start your search?</h1>
-    <p class="text-muted">Choose from our range of fantastic properties!</p>
-    <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
+  <h1 class="text-muted">Ready to start your search?</h1>
+  <p class="text-muted">Choose from our range of fantastic properties!</p>
+  <a href="{% url 'properties:advanced_property_search' %}"><button class="btn btn-primary">Search!</button></a>
 </div>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+<div class="container-fluid text-white bg-primary shadow">
+  <div class="container text-center justify-content-center pt-5 pb-5">
+    <h1>Quick search!</h1>
+    <p>Choose a town or city to start your search!</p>
+    <form action="{% url 'properties:quick_property_search' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="text-center btn btn-success border-white" type="submit" value="Search properties!">
+    </form>
+  </div>
+</div>
