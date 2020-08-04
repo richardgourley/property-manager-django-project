@@ -1,7 +1,11 @@
 body{
-	font-family:'Nunito', sans-serif;
+  font-family:'Nunito', sans-serif;
 }
 
 .navbar-brand{
-	font-family: 'Merienda One', cursive;
+  font-family: 'Merienda One', cursive;
+}
+
+p{
+  font-size:110%;
 }
