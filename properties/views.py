@@ -4,6 +4,7 @@ from .models import Property, City, Office, Agent
 from .forms import QuickPropertySearchForm, AdvancedPropertySearchForm
 from django.db.models import Q
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
