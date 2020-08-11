@@ -4,7 +4,7 @@ from .models import Property, City, Office, Agent
 from .forms import QuickPropertySearchForm, AdvancedPropertySearchForm
 from django.db.models import Q
 from django.utils import timezone
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -30,7 +30,12 @@ def quick_property_search(request):
     else:
         form = QuickPropertySearchForm()
 
-    return render(request, 'properties/quick-property-search.html', {'form':form})
+    return render(request, 'properties/quick-property-search.html', {
+        'form':form,
+        })
+
+def city_view(request, id):
+    return render(request, 'properties/city.html', {'hello': id})
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
