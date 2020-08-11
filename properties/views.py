@@ -35,7 +35,8 @@ def quick_property_search(request):
         })
 
 def city_view(request, id):
-    return render(request, 'properties/city.html', {'hello': id})
+    properties = Property.objects.filter(city__id=id)
+    return render(request, 'properties/city.html', {'properties': properties})
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
