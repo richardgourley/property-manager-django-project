@@ -5,6 +5,9 @@ from .forms import QuickPropertySearchForm, AdvancedPropertySearchForm
 from django.db.models import Q
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -24,9 +27,8 @@ def quick_property_search(request):
         form = QuickPropertySearchForm(request.POST)
         if form.is_valid():
             city_name = form.cleaned_data['city']
-            properties = Property.objects.filter(city=city_name).filter(pub_date__lte=timezone.now())
-            message = "We found 1 matching result" if len(properties) == 1 else "We found {} matching results.".format(len(properties))
-            return render(request, 'properties/quick-property-search.html', {'properties':properties, 'message':message, 'form':form})
+            city = City.objects.get(city_name=city_name)
+            return HttpResponseRedirect(reverse('properties:city_view', args=(city.slug,)))
     else:
         form = QuickPropertySearchForm()
 
@@ -34,9 +36,21 @@ def quick_property_search(request):
         'form':form,
         })
 
-def city_view(request, id):
-    properties = Property.objects.filter(city__id=id)
-    return render(request, 'properties/city.html', {'properties': properties})
+def city_view(request, slug):
+    city = get_object_or_404(City, slug=slug)
+    properties = Property.objects.filter(city__slug=slug).filter(pub_date__lte=timezone.now())
+    num_properties = properties.count()
+    paginator = Paginator(properties, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    form = QuickPropertySearchForm()
+    return render(request, 'properties/city.html', {
+        'page_obj':page_obj,
+        'num_properties':num_properties,
+        'city':city,
+        'form':form,
+        }
+    )
 
 class LocationsView(generic.ListView):
     template_name = 'properties/locations.html'
