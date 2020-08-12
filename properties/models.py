@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Office(models.Model):
@@ -12,8 +13,12 @@ class City(models.Model):
     class Meta:
         verbose_name = 'city'
         verbose_name_plural = 'cities'
-    city_name = models.CharField(max_length=150)
+    city_name = models.CharField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=200)
 
+    def get_absolute_url(self):
+        return reverse('city', args=[str(self.city_name)])
+    
     def __str__(self):
         return self.city_name
 
