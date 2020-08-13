@@ -38,7 +38,7 @@ def quick_property_search(request):
 
 def city_view(request, slug):
     city = get_object_or_404(City, slug=slug)
-    properties = Property.objects.filter(city__slug=slug).filter(pub_date__lte=timezone.now())
+    properties = Property.objects.filter(city__slug=slug).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     num_properties = properties.count()
     paginator = Paginator(properties, 10)
     page_number = request.GET.get('page')
