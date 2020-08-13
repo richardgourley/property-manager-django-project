@@ -14,6 +14,7 @@ class AgentInLine(admin.TabularInline):
 class PropertyAdmin(admin.ModelAdmin):
     list_display = ['property_name', 'pub_date', 'bedrooms', 'bathrooms', 'city', 'display_agents', 'price']
     list_filter = ['pub_date', 'city']
+    prepopulated_fields = {'slug':('property_name',)}
     
     inlines = [
         AgentInLine,
@@ -21,7 +22,7 @@ class PropertyAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('General Information', {
-            'fields': ('property_name','property_image','city','street_number','street_address')
+            'fields': ('property_name','slug','property_image','city','street_number','street_address')
         }),
         ('Details', {
             'fields': ('bedrooms','bathrooms')
@@ -35,7 +36,12 @@ class PropertyAdmin(admin.ModelAdmin):
 class AgentAdmin(admin.ModelAdmin):
     list_display = ['agent_name', 'email', 'office']
 
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    list_display = ('city_name',)
+    prepopulated_fields = {'slug': ('city_name',)}
+
 #admin.site.register(Property, PropertyAdmin)
 #admin.site.register(Agent, AgentAdmin)
 admin.site.register(Office)
-admin.site.register(City)
+#admin.site.register(City)
