@@ -14,7 +14,7 @@ class City(models.Model):
         verbose_name = 'city'
         verbose_name_plural = 'cities'
     city_name = models.CharField(max_length=150, unique=True)
-    slug = models.SlugField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
 
     def get_absolute_url(self):
         return reverse('city', args=[str(self.city_name)])
@@ -26,7 +26,7 @@ class Property(models.Model):
     class Meta:
         verbose_name = 'property'
         verbose_name_plural = 'properties'
-    property_name = models.CharField(max_length=150, help_text="Eg. A beautiful 2 bedroom house with a large garden.")
+    property_name = models.CharField(max_length=150, unique=True, help_text="Eg. A beautiful 2 bedroom house with a large garden.")
     property_image = models.ImageField(upload_to="images", null=True)
     bedrooms = models.PositiveSmallIntegerField(default=0)
     bathrooms = models.PositiveSmallIntegerField(default=0)
@@ -36,6 +36,7 @@ class Property(models.Model):
     street_address = models.CharField(max_length=150)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=False)
     price = models.DecimalField(default=750, max_digits=7, decimal_places=2)
+    slug = models.SlugField(max_length=150, unique=True)
 
     def __str__(self):
         return self.property_name
