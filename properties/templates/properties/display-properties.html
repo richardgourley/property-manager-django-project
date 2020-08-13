@@ -9,7 +9,7 @@
     <div class="col-md-8 col-lg-6">
       <div class="card-body">
         <h3 class="card-title">
-        <a href="{% url 'properties:property_detail' property.id %}" >{{ property.property_name }}</a>
+        <a href="{% url 'properties:property_detail' property.slug %}" >{{ property.property_name }}</a>
         </h3>
         <p class="card-text"><strong>CITY/ TOWN: {{ property.city }}</strong></p>
         <p class="card-text">{{ property.description}}</p>
@@ -33,7 +33,7 @@
           <p class="card-text">EMAIL: info@mail.com</p>
         {% endif %}
         <h5 class="card-text">PRICE: ${{ property.price }} pcm</h5>
-        <a href="{% url 'properties:property_detail' property.id %}">
+        <a href="{% url 'properties:property_detail' property.slug %}">
           <button class="btn btn-success border-white">See more!</button>
         </a>
       </div>
