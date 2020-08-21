@@ -42,6 +42,8 @@ MEDIA
 - Saving and displaying images - using Pillow
 
 MODELS
+- Pagination added to city_view
+- HttpRedirect used in quick_search
 - Many to many relationships
 - Foreign keys
 - Class Meta - Verbose name/s corrects display of 'citys' 'propertys'
@@ -50,6 +52,7 @@ MODELS
 - Bespoke functions and display in admin using .short_description
 
 ADMIN
+- prepopulated_fields used to auto fill in slug from the name of city/ property
 - list_display to configure display of items in list view of each object
 - list filter - allows filtering of large numbers of objects
 - fieldsets - put fields into groups
