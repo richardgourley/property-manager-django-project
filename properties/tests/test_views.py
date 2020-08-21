@@ -54,18 +54,18 @@ class IndexTests(TestCase):
 
     def test_newer_pub_date_appears_first(self):
         response = self.client.get(reverse('properties:index'))
-        self.assertEqual(response.context['properties'][0].property_name, "Nice house 1")
+        self.assertEqual(response.context['latest_properties'][0].property_name, "Nice house 1")
 
-class IndexTestsNoProperties(self):
+class IndexTestsNoProperties(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.client = Client()
 
     def test_0_properties_returns_coming_soon(self):
         response = self.client.get(reverse('properties:index'))
-        self.assertIn(str(response.content), "Coming soon")
+        self.assertTrue("Coming soon" in str(response.content))
 
-class PropertyDetailTests(self):
+class PropertyDetailTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.client = Client()
@@ -126,7 +126,7 @@ class QuickPropertySearchTests(TestCase):
 
     def test_quick_search_has_form(self):
         response = self.client.get(reverse('properties:quick_property_search'))
-        self.assertIn(response.context, form)
+        self.assertIn('form', response.context)
 
 class CityTests(TestCase):
     @classmethod
@@ -147,16 +147,17 @@ class CityTests(TestCase):
             )
 
     def test_incorrect_city_url_returns_404(self):
-        response = self.client.get(reverse('properties:city', args=("nice-city",)))
-        self.assertEqual(response.status, 404)
+        response = self.client.get(reverse('properties:city_view', args=("nice-city",)))
+        self.assertEqual(response.status_code, 404)
 
     def test_correct_city_url_returns_200(self):
-        response = self.client.get(reverse('properties:city', args=(self.city1.slug,)))
-        self.assertEqual(response.status, 200)
+        response = self.client.get(reverse('properties:city_view', args=(self.city1.slug,)))
+        self.assertEqual(response.status_code, 200)
 
-    def test_is_paginated(self):
-        response = self.client.get('properties:city', args=(self.city1.slug,))
-        self.assertTrue('is_paginated' in response.context)
+    def test_pagination_pageobj(self):
+        response = self.client.get(reverse('properties:city_view', args=(self.city1.slug,)))
+        self.assertTrue('page_obj' in response.context)
+        self.assertEqual("<Page 1 of 1>",  str(response.context["page_obj"]))
 
 class LocationTests(TestCase):
     @classmethod
@@ -180,6 +181,19 @@ class AgentsViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.client = Client()
+        city_name = "Las Vegas"
+        slug = slugify(city_name)
+        cls.city1 = City.objects.create(city_name=city_name, slug=slug)
+        property_name1 = "Nice house 1"
+        slug1 = slugify(property_name1)
+        cls.property1 = Property.objects.create(
+                property_name=property_name1,
+                property_image="images/portfolio-9.jpg",
+                bedrooms=2, bathrooms=2, description="A very nice house", 
+                pub_date=timezone.now(), 
+                street_number=5, street_address="Main Road", city=cls.city1, price=750,
+                slug=slug
+            )
 
     def test_200_response_status_agents_page(self):
         response = self.client.get(reverse('properties:agents'))
@@ -194,7 +208,7 @@ class AgentsViewTests(TestCase):
         response = self.client.get(reverse('properties:agents'))
         self.assertIn("info@mail.com", str(response.content))
 
-class AdvancedSearchTests(self):
+class AdvancedSearchTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.client = Client()
@@ -214,7 +228,7 @@ class AdvancedSearchTests(self):
 
     def test_advanced_search_has_form(self):
         response = self.client.get(reverse('properties:advanced_property_search'))
-        self.assertIn(response.context, form)
+        self.assertIn('form', response.context)
         
 
 
