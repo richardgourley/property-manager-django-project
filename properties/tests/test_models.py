@@ -1,8 +1,6 @@
 from django.test import TestCase, Client
 from django.utils.text import slugify
 from properties.models import Property, City, Office, Agent
-from django.urls import reverse
-import datetime
 from django.utils import timezone
 
 class OfficeModelTests(TestCase):
