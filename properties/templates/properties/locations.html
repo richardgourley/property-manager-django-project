@@ -1,10 +1,10 @@
 {% extends 'properties/base.html' %}
 
 {% block content %}
-<div class="container-fluid text-white bg-primary shadow">
+<div class="container-fluid text-white bg-info shadow">
   <div class="container text-center justify-content-center pt-5 pb-5">
-    <h1>Our office locations</h1>
-    <p>Get in touch or come and see us in person to find your perfect property rental!</p>
+    <h2 class="pb-3 font-weight-bold">Our office locations</h2>
+    <p class="font-weight-bold">Get in touch or come and see us in person to find your perfect property rental!</p>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
   <div class="row">
   {% for o in offices %}
     <div class="col-sm-6">
-      <div class="card mb-3 shadow-sm">
+      <div class="card mb-5 shadow-sm">
         <div class="card-body">
           <h2 class="card-title">{{ o.office_name }}</h2>
           <p class="card-text">{{ o.address|linebreaks }}</p>
