@@ -32,7 +32,7 @@
 
 ### Homepage
 
-![homepage](https://github.com/richardgourley/property-manager-django-project/blob/main/sreenshots/homepagequicksearch.png)
+![homepage](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/homepagequicksearch.png)
 
 
 ## SKILLS REFERENCE
