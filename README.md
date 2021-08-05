@@ -41,7 +41,45 @@ The front end has a quick search by city and a more advanced search which fiters
 
 ![homepage](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/advancedsearch.png)
 
+## GETTING STARTED
 
+```
+virtualenv (any virtual env directory name you like here) -p python3
+cd (virtual env name)
+source bin/activate
+pip install django
+django-admin startproject property-manager-project
+cd property-manager-project
+```
+
+- Set up a database for the project.
+- Create a .env file similar to below (in the same dir as 'manage.py') -
+- See 'settings.py' - decouple replaces the variables in 'settings.py' with your variables in the .env file.
+```
+SECRET_KEY=12345etc.
+DEBUG=True
+DB_NAME=dbname
+DB_USER=newusername
+DB_PASSWORD=password
+DB_HOST=127.0.0.1
+PORT=3306
+```
+
+Install python decouple and any database client you require (MySQL example used here) 
+
+```
+pip install python-decouple
+pip install mysqlclient
+```
+
+```
+python manage.py startapp properties
+
+python manage.py makemigrations properties
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
 
 ## SKILLS REFERENCE
 This could be a good Django practice website.  Here are some of the skills covered in building the site.
