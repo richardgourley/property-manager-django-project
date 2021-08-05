@@ -7,6 +7,10 @@ class QuickPropertySearchForm(forms.Form):
 class AdvancedPropertySearchForm(forms.Form):
 	city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label=None)
 	max_price = forms.ChoiceField(choices=[
+		('4000','4000'),
+		('3000','3000'),
+		('2000','2000'),
+		('1500','1500'),
 		('1300','1300'),
 		('1200','1200'),
 		('1100','1100'),
