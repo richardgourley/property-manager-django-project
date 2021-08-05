@@ -36,12 +36,11 @@ class PropertyAdmin(admin.ModelAdmin):
 class AgentAdmin(admin.ModelAdmin):
     list_display = ['agent_name', 'email', 'office']
 
+    fields = ['agent_name', 'email', 'office']
+
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('city_name',)
     prepopulated_fields = {'slug': ('city_name',)}
 
-#admin.site.register(Property, PropertyAdmin)
-#admin.site.register(Agent, AgentAdmin)
 admin.site.register(Office)
-#admin.site.register(City)
