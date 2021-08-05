@@ -1,11 +1,14 @@
 # Property Manager - Django Project
 
 ## INTRO
+A property website with a back end admin system where users can create properties, add images, assign agents to the property, create new office locations and add new towns or cities where properties are rented.
+
+The front end has a quick search by city and a more advanced search which fiters the properties based on number of bedrooms, price and location.
 
 ## FEATURES
 ### Models and Fields
-- Property - city(foreign key), image field, bedrooms, bathrooms, description, address details, price, published date.
-- Agent - name, property(many to many) , email
+- Property - city (foreign key), image field, bedrooms, bathrooms, description, address details, price, published date.
+- Agent - name, property (many to many field) , email
 - City - name
 - Office - name (geographical name), address
 
@@ -33,6 +36,11 @@
 ### Homepage
 
 ![homepage](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/homepagequicksearch.png)
+
+### Advanced Search
+
+![homepage](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/advancedsearch.png)
+
 
 
 ## SKILLS REFERENCE
