@@ -25,7 +25,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('property_name','slug','property_image','city','street_number','street_address')
         }),
         ('Details', {
-            'fields': ('bedrooms','bathrooms')
+            'fields': ('description', 'bedrooms','bathrooms')
         }),
         ('Date Published and Price', {
             'fields': ('pub_date', 'price')
