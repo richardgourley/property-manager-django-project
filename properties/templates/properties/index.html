@@ -9,12 +9,7 @@
 
 <!-- 5 LATEST PROPERTIES --->
 
-<div class="container pt-4">
-	<div class="row">
-	  <div class="col-12 pt-4 pb-5 text-center">
-        <h3 class="font-weight-bold text-muted">Welcome to Property Rentals!</h3>
-	  </div>
-	</div>
+<div class="container pt-5">
 	{% for property in latest_properties %}
 	  {% include 'properties/display-properties.html' %}
 	{% endfor %}
