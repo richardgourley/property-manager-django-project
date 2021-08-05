@@ -32,7 +32,7 @@
 
 ### Homepage
 
-![homepage](https://github.com/richardgourley/charity-organization-event-website/blob/main/sreenshots/homepage.png)
+![homepage](https://github.com/richardgourley/property-manager-django-project/blob/main/sreenshots/homepagequicksearch.png)
 
 
 ## SKILLS REFERENCE
