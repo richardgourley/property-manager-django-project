@@ -6,35 +6,37 @@
       <img class="img-fluid" src="{{ property.property_image.url }}">
       {% endif %}
     </div>
-    <div class="col-md-8 col-lg-6">
+    <div class="col-md-8 col-lg-6 p-2">
       <div class="card-body">
-        <h3 class="card-title">
-        <a href="{% url 'properties:property_detail' property.slug %}" >{{ property.property_name }}</a>
-        </h3>
-        <p class="card-text"><strong>CITY/ TOWN: {{ property.city }}</strong></p>
+        <div class="pb-4">
+          <h5 class="card-title font-weight-bold">
+            <a href="{% url 'properties:property_detail' property.slug %}" >{{ property.property_name }}</a>
+          </h5>
+        </div>
+        <p class="card-text text-muted"><strong>CITY/ TOWN: {{ property.city }}</strong></p>
         <p class="card-text">{{ property.description}}</p>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush pt-2">
           <li class="list-group-item">Bedrooms: {{ property.bedrooms }}</li>
           <li class="list-group-item">Bathrooms: {{ property.bathrooms }}</li>
         </ul>
       </div>
     </div>
-    <div class="col-md-12 col-lg-4 bg-light">
+    <div class="col-md-12 col-lg-4 p-2 bg-light">
       <div class="card-body">
-        <h4 class="card-title text-muted">CONTACT</h4>
+        <p class="card-title text-muted font-weight-bold pb-2">CONTACT</p>
         {% if property.agent_set.all %}
           {% for agent in property.agent_set.all %}
-          <p class="card-title">NAME: {{ agent.agent_name }}</p>
-          <p class="card-text">EMAIL: {{ agent.email }}</p>
-          <p class="card-text">OFFICE: {{ agent.office}}</p>
+          <p class="text-muted font-weight-bold"><small>NAME: {{ agent.agent_name }}</small></p>
+          <p class="text-muted"><small>EMAIL: {{ agent.email }}</small></p>
+          <p class="text-muted"><small>OFFICE: {{ agent.office}}</small></p>
           <hr>
           {% endfor %}
         {% else %}
-          <p class="card-text">EMAIL: info@mail.com</p>
+          <p class="text-muted font-weight-bold"><small>EMAIL: info@mail.com</small></p>
         {% endif %}
-        <h5 class="card-text">PRICE: ${{ property.price }} pcm</h5>
+        <h5 class="text-muted font-weight-bold pt-4">${{ property.price }} pcm</h5>
         <a href="{% url 'properties:property_detail' property.slug %}">
-          <button class="btn btn-success border-white">See more!</button>
+          <button class="btn btn-success border-white font-weight-bold mt-3">Learn more!</button>
         </a>
       </div>
     </div>
