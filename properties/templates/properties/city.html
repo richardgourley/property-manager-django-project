@@ -6,25 +6,33 @@
 {% include 'properties/quick-search-form.html' %}
 
 <!-- NUMBER OF PROPERTIES -->
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-primary pt-4" role="alert">
   {% if num_properties == 1 %}
-    We found {{ num_properties }} property
+    <p class="font-weight-bold">We found {{ num_properties }} property</p>
   {% else %}
-    We found {{ num_properties }} properties
+    <p class="font-weight-bold">We found {{ num_properties }} properties</p>
   {% endif %}
 </div>
 
+
 <div class="container py-4">
-  <h2>Properties in {{ city.city_name }}</h2>
+  <div class="pb-4">
+    <h4 class="font-weight-bold">Properties in {{ city.city_name }}</h4>
+  </div>
+
+  <!-- DISPLAY PROPERTIES -->
+  {% for property in page_obj %}
+    {% include 'properties/display-properties.html' %}
+  {% endfor %}
 
   <!-- PAGINATION -->
   {% if page_obj %}
-  <div class="pagination p-4">
+  <div class="pagination p-4 bg-light font-weight-bold">
     <span class="page-links">
       {% if page_obj.has_previous %}
         <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
       {% endif %}
-      <span class="page_current">
+      <span class="page_current px-4">
         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
       </span>
       {% if page_obj.has_next %}
@@ -35,11 +43,6 @@
   {% else %}
     <h4>Sorry, there are no available properties in {{ city.city_name }} at the moment.</h4>
   {% endif %}
-
-  <!-- DISPLAY PROPERTIES -->
-  {% for property in page_obj %}
-    {% include 'properties/display-properties.html' %}
-  {% endfor %}
 
 </div>
 
