@@ -8,12 +8,7 @@
 
 
 <!-- DISPLAY LATEST PROPERTIES - BEFORE SEARCH IS FILLED IN -->
-  <div class="container pt-4">
-    <div class="row">
-      <div class="col-12 p-3">
-        <h2>Our Latest Properties</h2>
-      </div>
-    </div>
+  <div class="container pt-5">
     {% for property in latest_properties %}
       {% include 'properties/display-properties.html' %}
     {% endfor %}
