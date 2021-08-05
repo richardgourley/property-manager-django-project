@@ -1,12 +1,12 @@
 {% load static %}
 <div class="card mb-5 shadow-sm">
   <div class="row no-gutters">
-    <div class="col-md-4 col-lg-2">
+    <div class="col-md-4 col-lg-3">
       {% if property.property_image %}
       <img class="img-fluid" src="{{ property.property_image.url }}">
       {% endif %}
     </div>
-    <div class="col-md-8 col-lg-6 p-2">
+    <div class="col-md-8 col-lg-6 p-3">
       <div class="card-body">
         <div class="pb-4">
           <h5 class="card-title font-weight-bold">
@@ -21,7 +21,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-12 col-lg-4 p-2 bg-light">
+    <div class="col-md-12 col-lg-3 p-2 bg-light">
       <div class="card-body">
         <p class="card-title text-muted font-weight-bold pb-2">CONTACT</p>
         {% if property.agent_set.all %}
