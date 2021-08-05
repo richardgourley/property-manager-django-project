@@ -32,10 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'videos.apps.VideosConfig',
     'properties.apps.PropertiesConfig',
-    'lessons.apps.LessonsConfig',
-    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'pollsapp.urls'
+ROOT_URLCONF = 'property-manager-project.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pollsapp.wsgi.application'
+WSGI_APPLICATION = 'property-manager-project.wsgi.application'
 
 
 # Database
