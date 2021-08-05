@@ -80,6 +80,10 @@ QUERIES
 - Reverse many to many queries using object.object_set.all()
 - Q - querying on mulitple fields
 
+TESTING
+- Test Case used.
+- Testing divided into 3 files - forms, views, models
+
 
 
 
