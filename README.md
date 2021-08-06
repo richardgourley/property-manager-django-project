@@ -5,12 +5,18 @@ A property website with a back end admin system where users can create propertie
 
 The front end has a quick search by city and a more advanced search which fiters the properties based on number of bedrooms, price and location.
 
+(If you're learning Django, this could be a good practice web application to try out after the polls app tutorial. See skills covered below.)
+
 ## FEATURES
 ### Models and Fields
 - Property - city (foreign key), image field, bedrooms, bathrooms, description, address details, price, published date.
 - Agent - name, property (many to many field) , email
 - City - name
 - Office - name (geographical name), address
+
+### Forms
+- Quick Search Form - uses ModelChoiceField to display all 'City' objects and allows user to search by city
+- Advanced Form - numerous ChoiceFields - max price, min bedrooms etc.
 
 ### Site Admin
 - Property - add property details and assign agents to a property
@@ -39,7 +45,11 @@ The front end has a quick search by city and a more advanced search which fiters
 
 ### Advanced Search
 
-![homepage](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/advancedsearch.png)
+![advancedsearch](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/advancedsearch.png)
+
+### Property Listing
+
+![propertylisting](https://github.com/richardgourley/property-manager-django-project/blob/master/screenshots/propertydisplayview.png)
 
 ## GETTING STARTED
 
@@ -52,8 +62,8 @@ django-admin startproject property-manager-project
 cd property-manager-project
 ```
 
-- Set up a database for the project.
-- Create a .env file similar to below (in the same dir as 'manage.py') -
+- Set up a database for the project. (OR you can use SQLlite for testing the project.)
+- Create a .env file similar to below (in the same dir as 'manage.py') - (Dont add db details to .env if only using SQLlite)
 - See 'settings.py' - decouple replaces the variables in 'settings.py' with your variables in the .env file.
 ```
 SECRET_KEY=12345etc.
